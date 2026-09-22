@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OrbexStudio — Agencia Web en San Miguel, Santiago</title>
+<meta name="description" content="Agencia web en San Miguel, Santiago. Sitios profesionales, automatizaciones con n8n y SEO local para negocios de Santiago." />
+<meta name="keywords" content="agencia web, sitios web San Miguel, automatizaciones n8n, SEO local Santiago, diseño web Santiago" />
+<meta property="og:title" content="OrbexStudio — Agencia Web en San Miguel, Santiago" />
+<meta property="og:description" content="Sitios profesionales, automatizaciones y SEO local para negocios de Santiago. Diseño a medida, sin plantillas." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+<!-- Google Analytics 4 -->
+<!-- EDITAR: reemplaza G-XXXXXXXXXX con el ID real.
+     Obtenerlo en: analytics.google.com → nueva propiedad -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
+<style>
+  :root{
+    --color-primary:#0C3C66;
+    --color-accent:#2E75B6;
+    --color-ink:#0A1F33;
+    --color-terra:#D98C3F;
+    --color-paper:#F6F3EC;
+    --color-paper-alt:#EDE9DF;
+    --font-serif:'Playfair Display', Georgia, serif;
+    --font-sans:'DM Sans', -apple-system, sans-serif;
+    --nav-h:76px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; scroll-padding-top:var(--nav-h); }
+  body{
+    margin:0;
+    font-family:var(--font-sans);
+    color:var(--color-ink);
+    background:var(--color-paper);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ margin:0; padding:0; list-style:none; }
+  h1,h2,h3{ font-family:var(--font-serif); font-weight:600; margin:0; }
+  section{ position:relative; }
+  .container{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+  .eyebrow{
+    display:inline-block;
+    font-size:.78rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--color-terra);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  .section-head{ max-width:640px; margin-bottom:56px; }
+  .section-head h2{ font-size:clamp(1.8rem,3.4vw,2.6rem); }
+  .section-head p{ margin-top:14px; font-size:1.05rem; opacity:.8; }
+  .section-head.center{ margin-left:auto; margin-right:auto; text-align:center; }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--font-sans); font-weight:700; font-size:.95rem;
+    padding:14px 28px; border-radius:999px; border:1.5px solid transparent;
+    cursor:pointer; transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease), color .25s var(--ease);
+    white-space:nowrap;
+  }
+  .btn-primary{ background:var(--color-terra); color:#fff; }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 24px -8px rgba(217,140,63,.6); }
+  .btn-outline{ border-color:rgba(255,255,255,.55); color:#fff; }
+  .btn-outline:hover{ background:rgba(255,255,255,.12); transform:translateY(-2px); }
+  .btn-dark{ background:var(--color-primary); color:#fff; }
+  .btn-dark:hover{ background:var(--color-ink); transform:translateY(-2px); }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
+  .reveal.visible{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion:reduce){
+    html{ scroll-behavior:auto; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+    *{ animation:none !important; }
+  }
+
+  /* ---------- logo ---------- */
+  .logo{ display:flex; align-items:center; gap:0; color:#fff; }
+  .logo svg{ height:44px; width:auto; overflow:visible; }
+  .logo text{ font-family:var(--font-serif); }
+
+  /* ---------- nav ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    height:var(--nav-h);
+    display:flex; align-items:center;
+    background:transparent;
+    transition:background .35s var(--ease), backdrop-filter .35s var(--ease), box-shadow .35s var(--ease);
+  }
+  header.scrolled{
+    background:rgba(12,60,102,.97);
+    backdrop-filter:blur(10px);
+    box-shadow:0 8px 30px -12px rgba(0,0,0,.4);
+  }
+  header .container{ display:flex; align-items:center; justify-content:space-between; width:100%; }
+  .nav-links{ display:flex; gap:38px; align-items:center; }
+  .nav-links a{
+    color:#fff; font-weight:500; font-size:.95rem; opacity:.88;
+    position:relative; padding:4px 0;
+    transition:opacity .2s var(--ease);
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:-3px; width:0; height:1px;
+    background:var(--color-terra); transition:width .3s var(--ease);
+  }
+  .nav-links a:hover{ opacity:1; }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-cta{ display:flex; align-items:center; gap:22px; }
+  .nav-toggle{
+    display:none; background:none; border:none; cursor:pointer; padding:6px;
+    flex-direction:column; gap:5px;
+  }
+  .nav-toggle span{ width:24px; height:2px; background:#fff; display:block; border-radius:2px; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:var(--color-primary);
+    padding:calc(var(--nav-h) + 96px) 0 90px;
+    min-height:92vh;
+    display:flex; align-items:center;
+    overflow:hidden;
+  }
+  .hero-orbit{ position:absolute; inset:0; pointer-events:none; opacity:.35; }
+  .hero-inner{ position:relative; z-index:2; text-align:center; margin:0 auto; max-width:820px; }
+  .hero .eyebrow{ color:var(--color-terra); }
+  .hero h1{
+    color:#fff; font-size:clamp(2.4rem,5.6vw,4.1rem); line-height:1.12;
+    margin-bottom:22px;
+  }
+  .hero p.subtitle{
+    color:#D9E3EC; font-size:clamp(1.02rem,1.6vw,1.2rem); max-width:600px;
+    margin:0 auto 40px;
+  }
+  .hero-ctas{ display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-bottom:70px; }
+  .hero-stats{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+    border-top:1px solid rgba(255,255,255,.16); padding-top:36px;
+  }
+  .hero-stats .stat-num{
+    font-family:var(--font-serif); color:#fff; font-size:clamp(1.6rem,2.6vw,2.2rem);
+  }
+  .hero-stats .stat-label{ color:#B9CADA; font-size:.88rem; margin-top:6px; }
+
+  /* ---------- orbital divider ---------- */
+  .orbit-divider{ display:flex; justify-content:center; padding:0 0; }
+  .orbit-divider svg{ display:block; }
+
+  /* ---------- services ---------- */
+  .services{ background:var(--color-paper); padding:120px 0; }
+  .services-grid{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:28px;
+  }
+  .card{
+    background:#fff; border-radius:18px; padding:38px 34px;
+    border:1px solid rgba(10,31,51,.08);
+    position:relative; overflow:hidden;
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+  }
+  .card::after{
+    content:''; position:absolute; inset:0; border-radius:18px;
+    border:1.5px solid var(--color-accent); opacity:0; transform:scale(.92);
+    transition:opacity .4s var(--ease), transform .4s var(--ease);
+    pointer-events:none;
+  }
+  .card:hover{ transform:translateY(-6px); box-shadow:0 24px 44px -22px rgba(12,60,102,.28); }
+  .card:hover::after{ opacity:1; transform:scale(1); }
+  .card-icon{ margin-bottom:20px; color:var(--color-accent); }
+  .card h3{ font-size:1.28rem; margin-bottom:12px; color:var(--color-primary); }
+  .card p{ opacity:.78; font-size:.98rem; }
+
+  /* ---------- portfolio ---------- */
+  .portfolio{ background:var(--color-paper-alt); padding:120px 0; }
+  .portfolio-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .proj-card{
+    background:#fff; border-radius:18px; overflow:hidden;
+    border:1px solid rgba(10,31,51,.08);
+    position:relative;
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+    display:flex; flex-direction:column;
+  }
+  .proj-card::after{
+    content:''; position:absolute; inset:0; border-radius:18px;
+    border:1.5px solid var(--color-terra); opacity:0; transform:scale(.94);
+    transition:opacity .4s var(--ease), transform .4s var(--ease);
+    pointer-events:none;
+  }
+  .proj-card:hover{ transform:translateY(-6px); box-shadow:0 24px 44px -22px rgba(12,60,102,.28); }
+  .proj-card:hover::after{ opacity:1; transform:scale(1); }
+  .proj-thumb{
+    height:190px; display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:20px; font-size:.82rem; font-weight:500;
+    color:rgba(0,0,0,.55); line-height:1.5;
+  }
+  .proj-body{ padding:26px 26px 30px; display:flex; flex-direction:column; gap:12px; flex:1; }
+  .proj-badge{
+    align-self:flex-start; background:var(--color-paper-alt); color:var(--color-primary);
+    font-size:.74rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
+    padding:5px 12px; border-radius:999px;
+  }
+  .proj-body h3{ font-size:1.22rem; color:var(--color-primary); }
+  .proj-tags{ display:flex; flex-wrap:wrap; gap:8px; }
+  .proj-tags span{
+    font-size:.74rem; background:rgba(46,117,182,.1); color:var(--color-accent);
+    padding:4px 10px; border-radius:999px; font-weight:500;
+  }
+  .proj-body p.desc{ font-size:.92rem; opacity:.78; flex:1; }
+  .proj-link{
+    font-weight:700; color:var(--color-terra); font-size:.92rem;
+    display:inline-flex; align-items:center; gap:6px; margin-top:auto;
+    transition:gap .25s var(--ease);
+  }
+  .proj-link:hover{ gap:10px; }
+  .proj-link.disabled{ color:rgba(10,31,51,.35); pointer-events:none; }
+
+  /* ---------- proceso ---------- */
+  .proceso{ background:var(--color-primary); padding:120px 0; color:#fff; }
+  .proceso .section-head p{ color:#C7D5E2; }
+  .steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; position:relative; }
+  .step{ position:relative; padding:0 18px; text-align:left; }
+  .step-num{
+    font-family:var(--font-serif); font-size:1.1rem; color:var(--color-terra);
+    width:42px; height:42px; border:1.5px solid var(--color-terra); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; margin-bottom:22px;
+  }
+  .step h3{ font-size:1.12rem; margin-bottom:10px; color:#fff; }
+  .step p{ color:#C7D5E2; font-size:.92rem; }
+  .step-connector{
+    display:none;
+    position:absolute; top:21px; left:-50%; width:100%; height:14px;
+  }
+  .step:not(:first-child) .step-connector{ display:block; }
+
+  /* ---------- contacto ---------- */
+  .contacto{ background:var(--color-paper); padding:120px 0; }
+  .contact-grid{ display:grid; grid-template-columns:.85fr 1.15fr; gap:60px; }
+  .contact-info{ display:flex; flex-direction:column; gap:22px; }
+  .contact-info .whatsapp-btn{ align-self:flex-start; }
+  .contact-line{ display:flex; align-items:center; gap:12px; font-size:.98rem; }
+  .contact-line svg{ color:var(--color-accent); flex-shrink:0; }
+  .contact-note{ font-family:var(--font-serif); font-style:italic; font-size:1.15rem; color:var(--color-primary); margin-top:10px; }
+
+  form{ display:flex; flex-direction:column; gap:18px; }
+  .field{ display:flex; flex-direction:column; gap:8px; }
+  .field label{ font-size:.85rem; font-weight:700; color:var(--color-primary); }
+  .field input, .field select, .field textarea{
+    font-family:var(--font-sans); font-size:.98rem; padding:14px 16px;
+    border:1.5px solid rgba(10,31,51,.16); border-radius:10px;
+    background:#fff; color:var(--color-ink);
+    transition:border-color .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none; border-color:var(--color-accent); box-shadow:0 0 0 3px rgba(46,117,182,.15);
+  }
+  .field textarea{ resize:vertical; min-height:110px; }
+
+  /* ---------- footer ---------- */
+  footer{ background:var(--color-ink); color:#fff; padding:70px 0 30px; position:relative; overflow:hidden; }
+  .footer-orbit{ position:absolute; inset:0; opacity:.08; pointer-events:none; }
+  .footer-top{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    flex-wrap:wrap; gap:40px; position:relative; z-index:1;
+    padding-bottom:36px; border-bottom:1px solid rgba(255,255,255,.12);
+  }
+  .footer-tagline{ color:#9FB0C0; max-width:280px; font-size:.95rem; }
+  .footer-links{ display:flex; gap:32px; }
+  .footer-links a{ color:#C7D5E2; font-size:.92rem; transition:color .2s var(--ease); }
+  .footer-links a:hover{ color:var(--color-terra); }
+  .footer-bottom{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    padding-top:26px; font-size:.82rem; color:#7C8FA0; position:relative; z-index:1;
+  }
+
+  /* ---------- floating whatsapp ---------- */
+  .float-whatsapp{
+    position:fixed; bottom:26px; right:26px; z-index:200;
+    width:60px; height:60px; border-radius:50%;
+    background:#25D366; color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 26px -8px rgba(0,0,0,.4);
+  }
+  .float-whatsapp::before{
+    content:''; position:absolute; inset:0; border-radius:50%;
+    background:#25D366; animation:pulse 2.2s infinite;
+    z-index:-1;
+  }
+  @keyframes pulse{
+    0%{ transform:scale(1); opacity:.65; }
+    100%{ transform:scale(1.8); opacity:0; }
+  }
+  @media (prefers-reduced-motion:reduce){ .float-whatsapp::before{ animation:none; } }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:980px){
+    .services-grid{ grid-template-columns:1fr; }
+    .portfolio-grid{ grid-template-columns:repeat(2,1fr); }
+    .steps{ grid-template-columns:repeat(2,1fr); row-gap:44px; }
+    .step-connector{ display:none !important; }
+    .contact-grid{ grid-template-columns:1fr; }
+  }
+  @media (max-width:720px){
+    .nav-links, .nav-cta .btn-outline-cta{ display:none; }
+    header.nav-open .nav-links{
+      display:flex; position:absolute; top:var(--nav-h); left:0; right:0;
+      background:rgba(12,60,102,.97); backdrop-filter:blur(10px);
+      flex-direction:column; padding:22px 24px; gap:20px;
+    }
+    .nav-toggle{ display:flex; }
+    .portfolio-grid{ grid-template-columns:1fr; }
+    .hero-stats{ grid-template-columns:1fr; gap:20px; text-align:center; }
+    .steps{ grid-template-columns:1fr; }
+    .hero{ text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header id="siteHeader">
+  <div class="container">
+    <a href="#top" class="logo" aria-label="OrbexStudio - inicio">
+      <svg viewBox="0 0 190 66" role="img" aria-hidden="true">
+        <ellipse cx="95" cy="24" rx="72" ry="17" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".55" transform="rotate(-14 95 24)"/>
+        <text x="6" y="35" font-size="32" fill="currentColor">orbex</text>
+        <text x="8" y="56" font-size="11" letter-spacing="4.5" fill="currentColor" opacity=".85" font-family="'DM Sans',sans-serif">STUDIO</text>
+      </svg>
+    </a>
+    <nav class="nav-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#portafolio">Portafolio</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="https://wa.me/56979282151" target="_blank" rel="noopener" class="btn btn-primary btn-outline-cta">WhatsApp</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <svg class="hero-orbit" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <ellipse cx="600" cy="420" rx="560" ry="230" fill="none" stroke="#ffffff" stroke-width="1" opacity=".18" transform="rotate(-8 600 420)"/>
+    <ellipse cx="600" cy="420" rx="420" ry="170" fill="none" stroke="#2E75B6" stroke-width="1" opacity=".3" transform="rotate(-8 600 420)"/>
+    <circle cx="990" cy="230" r="5" fill="#D98C3F" opacity=".7"/>
+    <circle cx="180" cy="580" r="3.5" fill="#ffffff" opacity=".5"/>
+  </svg>
+  <div class="container hero-inner">
+    <span class="eyebrow">Agencia web · San Miguel, Santiago</span>
+    <h1 class="reveal">Sitios web que trabajan por tu negocio</h1>
+    <p class="subtitle reveal">Diseño profesional, automatizaciones y presencia en Google para negocios locales en Santiago.</p>
+    <div class="hero-ctas reveal">
+      <a href="#portafolio" class="btn btn-primary">Ver portafolio</a>
+      <a href="#servicios" class="btn btn-outline">Conoce los servicios</a>
+    </div>
+    <div class="hero-stats reveal">
+      <div class="stat"><div class="stat-num">+8</div><div class="stat-label">proyectos entregados</div></div>
+      <div class="stat"><div class="stat-num">3</div><div class="stat-label">rubros distintos</div></div>
+      <div class="stat"><div class="stat-num">San Miguel → Santiago</div><div class="stat-label">alcance de trabajo</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICIOS ============ -->
+<section class="services" id="servicios">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Lo que hacemos</span>
+      <h2>Servicios de OrbexStudio</h2>
+    </div>
+    <div class="services-grid">
+
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true">
+            <ellipse cx="24" cy="24" rx="20" ry="9" fill="none" stroke="currentColor" stroke-width="1.4" transform="rotate(-20 24 24)"/>
+            <circle cx="24" cy="24" r="7" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          </svg>
+        </div>
+        <h3>Sitio web profesional</h3>
+        <p>Diseño a medida con HTML, CSS y JS vanilla. Rápido, limpio y optimizado para Google desde el día uno.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true">
+            <ellipse cx="24" cy="24" rx="20" ry="9" fill="none" stroke="currentColor" stroke-width="1.4" transform="rotate(20 24 24)"/>
+            <circle cx="14" cy="26" r="2.6" fill="currentColor"/>
+            <circle cx="24" cy="18" r="2.6" fill="currentColor"/>
+            <circle cx="34" cy="26" r="2.6" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3>Automatizaciones</h3>
+        <p>Formularios que avisan por email o WhatsApp, confirmaciones automáticas y flujos con n8n para que el negocio trabaje solo.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true">
+            <ellipse cx="24" cy="24" rx="20" ry="9" fill="none" stroke="currentColor" stroke-width="1.4" transform="rotate(-20 24 24)"/>
+            <circle cx="24" cy="24" r="3" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3>SEO local</h3>
+        <p>Google Business Profile, Search Console y palabras clave locales para que te encuentren cuando buscan tu rubro en Santiago.</p>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true">
+            <ellipse cx="24" cy="24" rx="20" ry="9" fill="none" stroke="currentColor" stroke-width="1.4" transform="rotate(20 24 24)"/>
+            <circle cx="24" cy="24" r="7" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <circle cx="24" cy="17" r="1.8" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3>Mantención mensual</h3>
+        <p>Dominio, hosting, Analytics y soporte incluidos. Reporte mensual de visitas. Tú te enfocas en tu negocio.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ PORTAFOLIO ============ -->
+<section class="portfolio" id="portafolio">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Proyectos</span>
+      <h2>Portafolio</h2>
+      <p>Demos de presentación — cada sitio adaptado al rubro y al cliente.</p>
+    </div>
+
+    <div class="portfolio-grid">
+
+      <article class="proj-card reveal">
+        <div class="proj-thumb" style="background:#FBE9E4; color:#B5426B;">
+          Foto: pantallazo del hero de Mimi Gelato — heladería con catálogo de sabores
+        </div>
+        <div class="proj-body">
+          <span class="proj-badge">Heladería artesanal</span>
+          <h3>Mimi Gelato</h3>
+          <div class="proj-tags"><span>Sitio informativo</span><span>SEO local</span><span>Multi-local</span></div>
+          <p class="desc">Sitio para heladería con 3 locales en Santiago, catálogo de sabores y sección de reseñas.</p>
+          <a href="https://mimi-gelato-demo.vercel.app" target="_blank" rel="noopener" class="proj-link">Ver demo →</a>
+        </div>
+      </article>
+
+      <article class="proj-card reveal">
+        <div class="proj-thumb" style="background:#1A1A1A; color:#E85C4A;">
+          Foto: pantallazo de Inversiones Ulloa — sitio de neumáticos usados
+        </div>
+        <div class="proj-body">
+          <span class="proj-badge">Compra y venta de neumáticos</span>
+          <h3>Inversiones Ulloa</h3>
+          <div class="proj-tags"><span>Sitio industrial</span><span>SEO local</span></div>
+          <p class="desc">Sitio informativo serio para negocio de neumáticos usados en San Miguel.</p>
+          <a href="https://ezzl-studio.vercel.app" target="_blank" rel="noopener" class="proj-link">Ver demo →</a>
+        </div>
+      </article>
+
+      <article class="proj-card reveal">
+        <div class="proj-thumb" style="background:#FCEAEF; color:#C46A87;">
+          Foto: pantallazo de salón de belleza — servicios y galería de peluquería
+        </div>
+        <div class="proj-body">
+          <span class="proj-badge">Peluquería</span>
+          <h3>Salón de Belleza</h3>
+          <div class="proj-tags"><span>Sitio informativo</span><span>WhatsApp</span><span>SEO</span></div>
+          <p class="desc">Demo para peluquería de barrio con servicios, galería y botón de agenda por WhatsApp.</p>
+          <span class="proj-link disabled">Demo próximamente</span>
+        </div>
+      </article>
+
+      <article class="proj-card reveal">
+        <div class="proj-thumb" style="background:#1B1730; color:#9B6FD9;">
+          Foto: pantallazo de EZZL Studio — mundo banda y mundo estudio de grabación
+        </div>
+        <div class="proj-body">
+          <span class="proj-badge">Música y estudio de grabación</span>
+          <h3>EZZL Studio</h3>
+          <div class="proj-tags"><span>Multi-página</span><span>Booking</span><span>Artista</span></div>
+          <p class="desc">Sitio con dos mundos: la banda y el estudio de grabación. Formulario de booking integrado.</p>
+          <a href="https://ezzl-studio.vercel.app" target="_blank" rel="noopener" class="proj-link">Ver demo →</a>
+        </div>
+      </article>
+
+      <article class="proj-card reveal">
+        <div class="proj-thumb" style="background:#E7EEF6; color:#B8862F;">
+          Foto: pantallazo de Moizlicious — catálogo de repostería y pedidos
+        </div>
+        <div class="proj-body">
+          <span class="proj-badge">Repostería artesanal</span>
+          <h3>Moizlicious</h3>
+          <div class="proj-tags"><span>E-commerce</span><span>WhatsApp</span><span>SEO</span></div>
+          <p class="desc">Tienda online de repostería con catálogo de productos y pedido directo por WhatsApp.</p>
+          <a href="https://moizlicious.vercel.app" target="_blank" rel="noopener" class="proj-link">Ver demo →</a>
+        </div>
+      </article>
+
+      <article class="proj-card reveal">
+        <div class="proj-thumb" style="background:#E4F1EA; color:#B8862F;">
+          Foto: pantallazo de Mi Mascota Chile Spa — galería de trabajos y agenda
+        </div>
+        <div class="proj-body">
+          <span class="proj-badge">Spa de mascotas</span>
+          <h3>Mi Mascota Chile Spa</h3>
+          <div class="proj-tags"><span>Sitio informativo</span><span>Servicios</span><span>WhatsApp</span></div>
+          <p class="desc">Demo para spa de mascotas con galería de trabajos y agendamiento por WhatsApp.</p>
+          <span class="proj-link disabled">Demo próximamente</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESO ============ -->
+<section class="proceso" id="proceso">
+  <div class="container">
+    <div class="section-head center reveal" style="margin-left:auto;margin-right:auto;">
+      <span class="eyebrow">Cómo trabajamos</span>
+      <h2>Del primer mensaje al sitio publicado</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h3>Conversamos</h3>
+        <p>Me cuentas del negocio, qué necesitas y tus colores. Sin formularios complicados.</p>
+      </div>
+      <div class="step reveal">
+        <svg class="step-connector" viewBox="0 0 100 14" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 7 Q50 -6 100 7" fill="none" stroke="#D98C3F" stroke-width="1.3" opacity=".7"/>
+          <circle cx="50" cy="2" r="2.4" fill="#D98C3F"/>
+        </svg>
+        <div class="step-num">2</div>
+        <h3>Diseño y desarrollo</h3>
+        <p>En 5–7 días hábiles tienes el sitio listo para revisar. Ajustamos hasta que quede perfecto.</p>
+      </div>
+      <div class="step reveal">
+        <svg class="step-connector" viewBox="0 0 100 14" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 7 Q50 -6 100 7" fill="none" stroke="#D98C3F" stroke-width="1.3" opacity=".7"/>
+          <circle cx="50" cy="2" r="2.4" fill="#D98C3F"/>
+        </svg>
+        <div class="step-num">3</div>
+        <h3>Publicamos</h3>
+        <p>Subimos a Vercel, conectamos el dominio .cl y le avisamos a Google que existe.</p>
+      </div>
+      <div class="step reveal">
+        <svg class="step-connector" viewBox="0 0 100 14" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 7 Q50 -6 100 7" fill="none" stroke="#D98C3F" stroke-width="1.3" opacity=".7"/>
+          <circle cx="50" cy="2" r="2.4" fill="#D98C3F"/>
+        </svg>
+        <div class="step-num">4</div>
+        <h3>Mantención</h3>
+        <p>Yo me encargo de que siga funcionando. Tú te enfocas en atender a tus clientes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section class="contacto" id="contacto">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Hablemos</span>
+      <h2>¿Listo para tener tu sitio web?</h2>
+      <p>Cuéntame de tu negocio y te armo una propuesta sin costo.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <a href="https://wa.me/56979282151" target="_blank" rel="noopener" class="btn btn-primary whatsapp-btn">
+          Escríbeme por WhatsApp
+        </a>
+        <div class="contact-line">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          placeholder@orbexstudio.cl
+        </div>
+        <div class="contact-line">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+          San Miguel, Santiago
+        </div>
+        <p class="contact-note">Respondo el mismo día.</p>
+      </div>
+
+      <form id="contactForm" class="reveal">
+        <div class="field">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" required>
+        </div>
+        <div class="field">
+          <label for="contactoCliente">WhatsApp o email</label>
+          <input type="text" id="contactoCliente" name="contactoCliente" required>
+        </div>
+        <div class="field">
+          <label for="negocio">Tipo de negocio</label>
+          <input type="text" id="negocio" name="negocio" placeholder="Ej: peluquería, ferretería, café...">
+        </div>
+        <div class="field">
+          <label for="necesidad">¿Qué necesitas?</label>
+          <select id="necesidad" name="necesidad">
+            <option>Sitio web</option>
+            <option>Automatización</option>
+            <option>SEO</option>
+            <option>Mantención</option>
+            <option>No sé aún</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" placeholder="Cuéntame un poco más de tu negocio..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-dark">Enviar mensaje</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <svg class="footer-orbit" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <ellipse cx="600" cy="200" rx="520" ry="140" fill="none" stroke="#ffffff" stroke-width="1" transform="rotate(-10 600 200)"/>
+  </svg>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <a href="#top" class="logo" aria-label="OrbexStudio">
+          <svg viewBox="0 0 190 66" width="140" role="img" aria-hidden="true">
+            <ellipse cx="95" cy="24" rx="72" ry="17" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".55" transform="rotate(-14 95 24)"/>
+            <text x="6" y="35" font-size="32" fill="currentColor">orbex</text>
+            <text x="8" y="56" font-size="11" letter-spacing="4.5" fill="currentColor" opacity=".85" font-family="'DM Sans',sans-serif">STUDIO</text>
+          </svg>
+        </a>
+        <p class="footer-tagline">Sitios web para negocios reales en Santiago.</p>
+      </div>
+      <nav class="footer-links">
+        <a href="#servicios">Servicios</a>
+        <a href="#portafolio">Portafolio</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>Sitio web por <strong>OrbexStudio</strong> · San Miguel</p>
+      <p>© 2026 OrbexStudio · San Miguel, Santiago</p>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/56979282151" target="_blank" rel="noopener" class="float-whatsapp" aria-label="Escríbenos por WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.9.5 3.68 1.44 5.23L2 22l4.99-1.51a9.9 9.9 0 0 0 5.05 1.37h.01c5.46 0 9.9-4.45 9.9-9.91 0-5.46-4.44-9.95-9.91-9.95zm0 18.02c-1.57 0-3.03-.42-4.3-1.16l-.31-.18-3.05.92.92-2.97-.2-.32a8.06 8.06 0 0 1-1.24-4.4c0-4.46 3.63-8.08 8.1-8.08 4.46 0 8.09 3.62 8.09 8.08 0 4.46-3.63 8.11-8.01 8.11zm4.44-6.07c-.24-.12-1.43-.71-1.65-.79-.22-.08-.38-.12-.55.12-.16.24-.63.79-.77.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.42-.14-.01-.3-.01-.46-.01-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02 0 1.19.87 2.34.99 2.5.12.16 1.71 2.6 4.14 3.65.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.1-.22-.16-.46-.28z"/></svg>
+</a>
+
+<script>
+  var header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', function(){
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive:true });
+
+  var navToggle = document.getElementById('navToggle');
+  navToggle.addEventListener('click', function(){
+    header.classList.toggle('nav-open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(function(link){
+    link.addEventListener('click', function(){ header.classList.remove('nav-open'); });
+  });
+
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold:.15 });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
+  }
+
+  // WEBHOOK n8n CONECTAR AQUÍ
+  // Cuando n8n esté activo, reemplazar el bloque de abajo por un fetch()
+  // POST hacia el webhook de n8n con los mismos datos del formulario.
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = new FormData(e.target);
+    var texto = 'Hola OrbexStudio, quiero cotizar un sitio web.%0A%0A' +
+      'Nombre: ' + encodeURIComponent(data.get('nombre')) + '%0A' +
+      'Contacto: ' + encodeURIComponent(data.get('contactoCliente')) + '%0A' +
+      'Negocio: ' + encodeURIComponent(data.get('negocio')) + '%0A' +
+      'Necesito: ' + encodeURIComponent(data.get('necesidad')) + '%0A' +
+      'Mensaje: ' + encodeURIComponent(data.get('mensaje'));
+    window.open('https://wa.me/56979282151?text=' + texto, '_blank');
+  });
+</script>
+
+</body>
+</html>
