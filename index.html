@@ -766,13 +766,9 @@
   }
 
   // Demo de fidelización: llama al backend de fidelizacion-nexo (otro
-  // proyecto/dominio) que crea la tarjeta demo y devuelve los links de
-  // Apple/Google Wallet ya generados.
+  // proyecto/dominio) que crea la tarjeta demo y devuelve el link a la
+  // landing de fidelización, donde el usuario elige Apple o Google Wallet.
   var WALLET_DEMO_API = 'https://fidelizacion-nave.vercel.app/api/demo/orbexstudio';
-
-  function esIOS(){
-    return /iPad|iPhone|iPod/.test(navigator.userAgent);
-  }
 
   var walletDemoBtn = document.getElementById('walletDemoBtn');
   var walletDemoError = document.getElementById('walletDemoError');
@@ -788,7 +784,7 @@
         return res.json();
       })
       .then(function(data){
-        window.location.href = esIOS() ? data.appleWalletUrl : data.googleWalletUrl;
+        window.location.href = data.landingUrl;
       })
       .catch(function(err){
         console.error(err);
