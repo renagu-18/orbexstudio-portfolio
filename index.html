@@ -186,6 +186,17 @@
   .card h3{ font-size:1.28rem; margin-bottom:12px; color:var(--color-primary); }
   .card p{ opacity:.78; font-size:.98rem; }
 
+  /* ---------- demo fidelización ---------- */
+  .wallet-demo{ background:var(--color-paper); padding:100px 0; text-align:center; }
+  .wallet-demo-card{
+    max-width:480px; margin:0 auto; background:#fff; border-radius:18px;
+    padding:40px 34px; border:1px solid rgba(10,31,51,.08);
+  }
+  .wallet-demo-card p{ opacity:.78; font-size:.95rem; margin-top:8px; }
+  .wallet-demo-card .btn{ margin-top:6px; }
+  .wallet-demo-card .btn:disabled{ opacity:.6; cursor:not-allowed; transform:none; box-shadow:none; }
+  .wallet-demo-error{ margin-top:14px; color:#B3261E; font-size:.92rem; }
+
   /* ---------- portfolio ---------- */
   .portfolio{ background:var(--color-paper-alt); padding:120px 0; }
   .portfolio-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:32px; }
@@ -471,6 +482,22 @@
   </div>
 </section>
 
+<!-- ============ DEMO FIDELIZACIÓN ============ -->
+<section class="wallet-demo" id="demo-fidelizacion">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Pruébalo tú mismo</span>
+      <h2>Tarjeta de fidelización digital</h2>
+      <p>Así se ve el sistema de sellos que integramos con Apple Wallet y Google Wallet. Agrega una tarjeta demo (parte con 4 de 10 sellos) directo a tu celular.</p>
+    </div>
+    <div class="wallet-demo-card reveal">
+      <button id="walletDemoBtn" class="btn btn-primary" type="button">Agregar tarjeta demo a mi Wallet</button>
+      <p>Funciona en iPhone (Apple Wallet) y Android (Google Wallet).</p>
+      <p id="walletDemoError" class="wallet-demo-error" hidden></p>
+    </div>
+  </div>
+</section>
+
 <!-- ============ PORTAFOLIO ============ -->
 <section class="portfolio" id="portafolio">
   <div class="container">
@@ -737,6 +764,42 @@
   } else {
     document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
   }
+
+  // Demo de fidelización: llama al backend de fidelizacion-nexo (otro
+  // proyecto/dominio) que crea la tarjeta demo y devuelve los links de
+  // Apple/Google Wallet ya generados.
+  var WALLET_DEMO_API = 'https://fidelizacion-nave.vercel.app/api/demo/orbexstudio';
+
+  function esIOS(){
+    return /iPad|iPhone|iPod/.test(navigator.userAgent);
+  }
+
+  var walletDemoBtn = document.getElementById('walletDemoBtn');
+  var walletDemoError = document.getElementById('walletDemoError');
+
+  walletDemoBtn.addEventListener('click', function(){
+    walletDemoBtn.disabled = true;
+    walletDemoBtn.textContent = 'Generando...';
+    walletDemoError.hidden = true;
+
+    fetch(WALLET_DEMO_API, { method: 'POST' })
+      .then(function(res){
+        if (!res.ok) throw new Error('Error generando el pase');
+        return res.json();
+      })
+      .then(function(data){
+        window.location.href = esIOS() ? data.appleWalletUrl : data.googleWalletUrl;
+      })
+      .catch(function(err){
+        console.error(err);
+        walletDemoError.textContent = 'No se pudo generar el pase. Intenta de nuevo.';
+        walletDemoError.hidden = false;
+      })
+      .finally(function(){
+        walletDemoBtn.disabled = false;
+        walletDemoBtn.textContent = 'Agregar tarjeta demo a mi Wallet';
+      });
+  });
 
   // WEBHOOK n8n CONECTAR AQUÍ
   // Cuando n8n esté activo, reemplazar el bloque de abajo por un fetch()
