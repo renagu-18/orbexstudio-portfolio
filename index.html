@@ -187,15 +187,91 @@
   .card p{ opacity:.78; font-size:.98rem; }
 
   /* ---------- demo fidelización ---------- */
-  .wallet-demo{ background:var(--color-paper); padding:100px 0; text-align:center; }
+  .fidelizacion{ background:var(--color-paper); padding:100px 0; text-align:center; position:relative; overflow:hidden; }
+  .fidelizacion .fid-ring{
+    position:absolute; right:-180px; top:-160px; width:640px; height:640px;
+    opacity:.14; pointer-events:none;
+  }
   .wallet-demo-card{
-    max-width:480px; margin:0 auto; background:#fff; border-radius:18px;
+    max-width:480px; margin:36px auto 0; background:#fff; border-radius:18px;
     padding:40px 34px; border:1px solid rgba(10,31,51,.08);
   }
   .wallet-demo-card p{ opacity:.78; font-size:.95rem; margin-top:8px; }
   .wallet-demo-card .btn{ margin-top:6px; }
   .wallet-demo-card .btn:disabled{ opacity:.6; cursor:not-allowed; transform:none; box-shadow:none; }
   .wallet-demo-error{ margin-top:14px; color:#B3261E; font-size:.92rem; }
+
+  /* ---- tarjetas de ejemplo dentro de un mock-up de Wallet ---- */
+  .fid-row{ position:relative; max-width:640px; margin:0 auto; height:480px; z-index:2; }
+  .fid-phone{
+    position:absolute; width:216px; height:452px; border-radius:34px;
+    background:#0A1F33; padding:10px; box-sizing:border-box;
+    box-shadow:0 24px 40px -12px rgba(10,31,51,.35);
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+    cursor:pointer;
+  }
+  .fid-phone:hover{ box-shadow:0 34px 54px -10px rgba(10,31,51,.45); z-index:9; }
+  .fid-phone--a{ left:0; top:56px; transform:rotate(-9deg); }
+  .fid-phone--a:hover{ transform:rotate(-9deg) translateY(-18px) scale(1.03); }
+  .fid-phone--b{ left:190px; top:0; transform:rotate(0deg); z-index:5; }
+  .fid-phone--b:hover{ transform:translateY(-18px) scale(1.03); }
+  .fid-phone--c{ left:380px; top:56px; transform:rotate(9deg); }
+  .fid-phone--c:hover{ transform:rotate(9deg) translateY(-18px) scale(1.03); }
+
+  .fid-screen{
+    width:100%; height:100%; border-radius:26px; overflow:hidden;
+    display:flex; flex-direction:column; box-sizing:border-box;
+  }
+  .fid-notch{ width:64px; height:6px; border-radius:3px; background:rgba(255,255,255,.25); margin:10px auto 0; }
+  .fid-card{ margin:16px 14px 0; border-radius:16px; padding:16px; box-sizing:border-box; flex-shrink:0; text-align:left; }
+
+  .fid-icon-row{ display:flex; align-items:center; gap:9px; margin-bottom:16px; }
+  .fid-icon{
+    width:30px; height:30px; border-radius:9px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,.08);
+  }
+  .fid-icon svg{ width:18px; height:18px; }
+  .fid-icon--letter{ background:none; font-family:var(--font-serif); font-weight:700; font-size:19px; }
+  .fid-brand-name strong{ display:block; font-family:var(--font-serif); font-size:14px; line-height:1.2; }
+  .fid-brand-name span{ display:block; font-family:var(--font-sans); font-size:9px; letter-spacing:.12em; text-transform:uppercase; opacity:.65; margin-top:2px; }
+
+  .fid-stamps{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
+  .fid-stamp{ aspect-ratio:1; border-radius:50%; box-sizing:border-box; display:flex; align-items:center; justify-content:center; }
+  .fid-stamp svg{ width:50%; height:50%; }
+  .fid-stamp.is-empty{ border:1.4px dashed; background:transparent; }
+  .fid-stamp.is-next{ animation:fid-pulse 1.8s ease-in-out infinite; }
+  @keyframes fid-pulse{
+    0%,100%{ box-shadow:0 0 0 0 rgba(217,140,63,.4); }
+    50%{ box-shadow:0 0 0 6px rgba(217,140,63,0); }
+  }
+
+  .fid-stats{ display:flex; justify-content:space-between; gap:8px; margin:0 0 16px; padding-top:12px; border-top:1px solid rgba(255,255,255,.14); }
+  .fid-stat{ min-width:0; }
+  .fid-stat dt{ margin:0 0 3px; font-family:var(--font-sans); font-size:8px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; opacity:.6; }
+  .fid-stat dd{ margin:0; font-family:var(--font-sans); font-size:12px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+  .fid-qr{ width:74px; height:74px; margin:0 auto; background:#fff; border-radius:6px; padding:5px; box-sizing:border-box; }
+  .fid-qr svg{ width:100%; height:100%; display:block; }
+
+  .fid-dots{ display:flex; justify-content:center; gap:5px; margin-top:14px; }
+  .fid-dots span{ width:5px; height:5px; border-radius:50%; }
+
+  .fid-tag{
+    position:absolute; top:-10px; left:50%; transform:translateX(-50%);
+    background:#0A1F33; color:#F6F3EC; font-size:10px; letter-spacing:.06em;
+    text-transform:uppercase; padding:4px 10px; border-radius:999px; white-space:nowrap;
+  }
+  .fid-tag--active{ background:var(--color-terra); }
+
+  @media (max-width:680px){
+    .fid-row{
+      display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory;
+      height:auto; padding:24px 4px 8px; -webkit-overflow-scrolling:touch;
+    }
+    .fid-phone{ position:static; transform:none !important; flex:0 0 auto; scroll-snap-align:center; }
+    .fid-phone:hover{ transform:none !important; }
+  }
 
   /* ---------- portfolio ---------- */
   .portfolio{ background:var(--color-paper-alt); padding:120px 0; }
@@ -614,13 +690,192 @@
 </section>
 
 <!-- ============ DEMO FIDELIZACIÓN ============ -->
-<section class="wallet-demo" id="demo-fidelizacion">
+<section class="fidelizacion" id="demo-fidelizacion">
+  <svg class="fid-ring" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="320" cy="320" r="300" fill="none" stroke="#2E75B6" stroke-width="1.5"/>
+    <circle cx="320" cy="320" r="230" fill="none" stroke="#0C3C66" stroke-width="1"/>
+    <circle cx="320" cy="320" r="150" fill="none" stroke="#D98C3F" stroke-width="1"/>
+  </svg>
+
+  <!-- Sprite de íconos, oculto. Reutilizado por las 3 tarjetas via <use>. -->
+  <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+    <defs>
+      <!-- Sellos: planeta con anillo (identidad OrbexStudio) -->
+      <symbol id="fid-i-planet" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <ellipse cx="12" cy="13" rx="9.4" ry="3.4" transform="rotate(-16 12 13)" />
+          <circle cx="12" cy="10.5" r="5.1" />
+          <path d="M7.6 9.2c1.4.9 2.9 1.3 4.4 1.3s3-.4 4.4-1.3" stroke-width="1" opacity=".85" />
+          <path d="M8.2 12.4c1.2.6 2.5.9 3.8.9s2.6-.3 3.8-.9" stroke-width="1" opacity=".85" />
+        </g>
+      </symbol>
+      <!-- Sellos: tijeras (barbería) -->
+      <symbol id="fid-i-scissors" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6" cy="6" r="2.4"/>
+          <circle cx="6" cy="18" r="2.4"/>
+          <line x1="8.2" y1="7.6" x2="20" y2="18"/>
+          <line x1="8.2" y1="16.4" x2="20" y2="6"/>
+        </g>
+      </symbol>
+      <!-- Sellos: vaso/taza (cafetería) -->
+      <symbol id="fid-i-cup" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6.5 5h11l-1.3 12.2a2.4 2.4 0 0 1-2.4 2.1h-3.6a2.4 2.4 0 0 1-2.4-2.1L6.5 5z"/>
+          <line x1="5" y1="5" x2="19" y2="5"/>
+        </g>
+      </symbol>
+      <!-- Código QR falso (decorativo, no escaneable) -->
+      <symbol id="fid-i-qr" viewBox="0 0 63 63">
+        <rect width="63" height="63" fill="#fff"/>
+        <g fill="#141414">
+          <rect x="0" y="0" width="21" height="21"/><rect x="3" y="3" width="15" height="15" fill="#fff"/><rect x="6" y="6" width="9" height="9"/>
+          <rect x="42" y="0" width="21" height="21"/><rect x="45" y="3" width="15" height="15" fill="#fff"/><rect x="48" y="6" width="9" height="9"/>
+          <rect x="0" y="42" width="21" height="21"/><rect x="3" y="45" width="15" height="15" fill="#fff"/><rect x="6" y="48" width="9" height="9"/>
+          <rect x="27" y="0" width="3" height="3"/><rect x="36" y="0" width="3" height="3"/>
+          <rect x="24" y="3" width="3" height="3"/><rect x="36" y="3" width="3" height="3"/>
+          <rect x="30" y="6" width="3" height="3"/><rect x="33" y="6" width="3" height="3"/><rect x="36" y="6" width="3" height="3"/>
+          <rect x="24" y="9" width="3" height="3"/>
+          <rect x="21" y="15" width="3" height="3"/><rect x="30" y="15" width="3" height="3"/><rect x="39" y="15" width="3" height="3"/>
+          <rect x="21" y="18" width="3" height="3"/><rect x="33" y="18" width="3" height="3"/>
+          <rect x="15" y="21" width="3" height="3"/><rect x="18" y="21" width="3" height="3"/><rect x="21" y="21" width="3" height="3"/><rect x="39" y="21" width="3" height="3"/><rect x="42" y="21" width="3" height="3"/><rect x="60" y="21" width="3" height="3"/>
+          <rect x="3" y="24" width="3" height="3"/><rect x="9" y="24" width="3" height="3"/><rect x="30" y="24" width="3" height="3"/><rect x="36" y="24" width="3" height="3"/><rect x="42" y="24" width="3" height="3"/><rect x="48" y="24" width="3" height="3"/><rect x="54" y="24" width="3" height="3"/>
+          <rect x="0" y="27" width="3" height="3"/><rect x="33" y="27" width="3" height="3"/><rect x="36" y="27" width="3" height="3"/><rect x="39" y="27" width="3" height="3"/><rect x="42" y="27" width="3" height="3"/><rect x="45" y="27" width="3" height="3"/>
+          <rect x="6" y="30" width="3" height="3"/><rect x="15" y="30" width="3" height="3"/><rect x="24" y="30" width="3" height="3"/><rect x="33" y="30" width="3" height="3"/><rect x="42" y="30" width="3" height="3"/><rect x="51" y="30" width="3" height="3"/><rect x="60" y="30" width="3" height="3"/>
+          <rect x="6" y="33" width="3" height="3"/><rect x="18" y="33" width="3" height="3"/><rect x="27" y="33" width="3" height="3"/><rect x="30" y="33" width="3" height="3"/><rect x="39" y="33" width="3" height="3"/><rect x="51" y="33" width="3" height="3"/>
+          <rect x="0" y="36" width="3" height="3"/><rect x="3" y="36" width="3" height="3"/><rect x="6" y="36" width="3" height="3"/><rect x="24" y="36" width="3" height="3"/><rect x="27" y="36" width="3" height="3"/><rect x="45" y="36" width="3" height="3"/><rect x="48" y="36" width="3" height="3"/><rect x="51" y="36" width="3" height="3"/>
+          <rect x="15" y="39" width="3" height="3"/><rect x="21" y="39" width="3" height="3"/><rect x="27" y="39" width="3" height="3"/><rect x="33" y="39" width="3" height="3"/><rect x="39" y="39" width="3" height="3"/><rect x="60" y="39" width="3" height="3"/>
+          <rect x="21" y="42" width="3" height="3"/><rect x="24" y="42" width="3" height="3"/><rect x="27" y="42" width="3" height="3"/><rect x="30" y="42" width="3" height="3"/>
+          <rect x="27" y="45" width="3" height="3"/><rect x="36" y="45" width="3" height="3"/><rect x="45" y="45" width="3" height="3"/><rect x="54" y="45" width="3" height="3"/>
+          <rect x="24" y="48" width="3" height="3"/><rect x="36" y="48" width="3" height="3"/><rect x="48" y="48" width="3" height="3"/><rect x="57" y="48" width="3" height="3"/><rect x="60" y="48" width="3" height="3"/>
+          <rect x="30" y="51" width="3" height="3"/><rect x="33" y="51" width="3" height="3"/><rect x="36" y="51" width="3" height="3"/><rect x="54" y="51" width="3" height="3"/><rect x="57" y="51" width="3" height="3"/>
+          <rect x="24" y="54" width="3" height="3"/><rect x="45" y="54" width="3" height="3"/><rect x="51" y="54" width="3" height="3"/><rect x="57" y="54" width="3" height="3"/>
+          <rect x="48" y="57" width="3" height="3"/><rect x="51" y="57" width="3" height="3"/><rect x="54" y="57" width="3" height="3"/><rect x="57" y="57" width="3" height="3"/><rect x="60" y="57" width="3" height="3"/>
+          <rect x="21" y="60" width="3" height="3"/><rect x="30" y="60" width="3" height="3"/><rect x="39" y="60" width="3" height="3"/><rect x="48" y="60" width="3" height="3"/><rect x="57" y="60" width="3" height="3"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
   <div class="container">
     <div class="section-head center reveal">
-      <span class="eyebrow">Pruébalo tú mismo</span>
-      <h2>Tarjeta de fidelización digital</h2>
-      <p>Así se ve el sistema de sellos que integramos con Apple Wallet y Google Wallet. Agrega una tarjeta demo (parte con 4 de 10 sellos) directo a tu celular.</p>
+      <span class="eyebrow">Fidelización digital</span>
+      <h2>Tarjetas que tus clientes ya llevan encima</h2>
+      <p>Sellos digitales directo en Apple Wallet y Google Wallet. Prueba tú mismo la tarjeta de OrbexStudio.</p>
     </div>
+
+    <div class="fid-row reveal">
+
+      <!-- Tarjeta A: Blackwood Barber (vitrina) -->
+      <div class="fid-phone fid-phone--a">
+        <span class="fid-tag">Ejemplo de cliente</span>
+        <div class="fid-screen" style="background:#141414; color:#E7C878;">
+          <div class="fid-notch"></div>
+          <div class="fid-card" style="background:#1C1A16; border:1px solid #C9A24B;">
+            <div class="fid-icon-row">
+              <div class="fid-icon fid-icon--letter">B</div>
+              <div class="fid-brand-name" style="color:#F1E2B8;">
+                <strong>Blackwood</strong>
+                <span style="color:#B9A98A;">Barber</span>
+              </div>
+            </div>
+            <div class="fid-stamps">
+              <div class="fid-stamp" style="background:#E7C878;"><svg style="color:#1C1A16;"><use href="#fid-i-scissors"/></svg></div>
+              <div class="fid-stamp" style="background:#E7C878;"><svg style="color:#1C1A16;"><use href="#fid-i-scissors"/></svg></div>
+              <div class="fid-stamp" style="background:#E7C878;"><svg style="color:#1C1A16;"><use href="#fid-i-scissors"/></svg></div>
+              <div class="fid-stamp" style="background:#E7C878;"><svg style="color:#1C1A16;"><use href="#fid-i-scissors"/></svg></div>
+              <div class="fid-stamp is-empty" style="border-color:#6B5F44; color:#6B5F44;"><svg><use href="#fid-i-scissors"/></svg></div>
+              <div class="fid-stamp is-empty" style="border-color:#6B5F44; color:#6B5F44;"><svg><use href="#fid-i-scissors"/></svg></div>
+            </div>
+            <dl class="fid-stats" style="color:#F1E2B8; border-color:rgba(231,200,120,.18);">
+              <div class="fid-stat"><dt style="color:#B9A98A;">Miembro</dt><dd>Invitado</dd></div>
+              <div class="fid-stat"><dt style="color:#B9A98A;">Premios</dt><dd>50% dcto. corte</dd></div>
+              <div class="fid-stat"><dt style="color:#B9A98A;">Sellos</dt><dd>4</dd></div>
+            </dl>
+            <div class="fid-qr"><svg><use href="#fid-i-qr"/></svg></div>
+          </div>
+          <div class="fid-dots">
+            <span style="background:rgba(231,200,120,.7);"></span>
+            <span style="background:rgba(231,200,120,.25);"></span>
+            <span style="background:rgba(231,200,120,.25);"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta B: OrbexStudio -->
+      <div class="fid-phone fid-phone--b">
+        <span class="fid-tag fid-tag--active">Nuestra tarjeta</span>
+        <div class="fid-screen" style="background:#0A1F33; color:#D98C3F;">
+          <div class="fid-notch"></div>
+          <div class="fid-card" style="background:#0C3C66; border:1px solid #2E75B6;">
+            <div class="fid-icon-row">
+              <div class="fid-icon" style="color:#D98C3F;"><svg><use href="#fid-i-planet"/></svg></div>
+              <div class="fid-brand-name" style="color:#F6F3EC;">
+                <strong>orbex</strong>
+                <span style="color:#BFD3E6;">studio</span>
+              </div>
+            </div>
+            <div class="fid-stamps">
+              <div class="fid-stamp" style="background:#D98C3F;"><svg style="color:#0A1F33;"><use href="#fid-i-planet"/></svg></div>
+              <div class="fid-stamp" style="background:#D98C3F;"><svg style="color:#0A1F33;"><use href="#fid-i-planet"/></svg></div>
+              <div class="fid-stamp" style="background:#D98C3F;"><svg style="color:#0A1F33;"><use href="#fid-i-planet"/></svg></div>
+              <div class="fid-stamp" style="background:#D98C3F;"><svg style="color:#0A1F33;"><use href="#fid-i-planet"/></svg></div>
+              <div class="fid-stamp is-empty is-next" style="border-color:#D98C3F; color:#D98C3F;"><svg><use href="#fid-i-planet"/></svg></div>
+              <div class="fid-stamp is-empty" style="border-color:#2E75B6; color:#2E75B6;"><svg><use href="#fid-i-planet"/></svg></div>
+            </div>
+            <dl class="fid-stats" style="color:#F6F3EC; border-color:rgba(246,243,236,.16);">
+              <div class="fid-stat"><dt style="color:#BFD3E6;">Miembro</dt><dd>Tú</dd></div>
+              <div class="fid-stat"><dt style="color:#BFD3E6;">Premios</dt><dd>Sorpresa al 6º</dd></div>
+              <div class="fid-stat"><dt style="color:#BFD3E6;">Sellos</dt><dd>4</dd></div>
+            </dl>
+            <div class="fid-qr"><svg><use href="#fid-i-qr"/></svg></div>
+          </div>
+          <div class="fid-dots">
+            <span style="background:rgba(191,211,230,.25);"></span>
+            <span style="background:rgba(191,211,230,.7);"></span>
+            <span style="background:rgba(191,211,230,.25);"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta C: Café Aurora (vitrina) -->
+      <div class="fid-phone fid-phone--c">
+        <span class="fid-tag">Ejemplo de cliente</span>
+        <div class="fid-screen" style="background:#FBF3EA; color:#8A5A34;">
+          <div class="fid-notch" style="background:rgba(10,31,51,.15);"></div>
+          <div class="fid-card" style="background:#EDD9BE; border:1px solid #C9A26B;">
+            <div class="fid-icon-row">
+              <div class="fid-icon" style="color:#8A5A34; background:rgba(138,90,52,.1);"><svg><use href="#fid-i-cup"/></svg></div>
+              <div class="fid-brand-name" style="color:#5A3A22;">
+                <strong>Café Aurora</strong>
+                <span style="color:#8C6B4F;">San Miguel</span>
+              </div>
+            </div>
+            <div class="fid-stamps">
+              <div class="fid-stamp" style="background:#8A5A34;"><svg style="color:#FBF3EA;"><use href="#fid-i-cup"/></svg></div>
+              <div class="fid-stamp is-empty" style="border-color:#C9A26B; color:#C9A26B;"><svg><use href="#fid-i-cup"/></svg></div>
+              <div class="fid-stamp is-empty" style="border-color:#C9A26B; color:#C9A26B;"><svg><use href="#fid-i-cup"/></svg></div>
+              <div class="fid-stamp is-empty" style="border-color:#C9A26B; color:#C9A26B;"><svg><use href="#fid-i-cup"/></svg></div>
+              <div class="fid-stamp is-empty" style="border-color:#C9A26B; color:#C9A26B;"><svg><use href="#fid-i-cup"/></svg></div>
+              <div class="fid-stamp is-empty" style="border-color:#C9A26B; color:#C9A26B;"><svg><use href="#fid-i-cup"/></svg></div>
+            </div>
+            <dl class="fid-stats" style="color:#5A3A22; border-color:rgba(138,90,52,.18);">
+              <div class="fid-stat"><dt style="color:#8C6B4F;">Miembro</dt><dd>Invitado</dd></div>
+              <div class="fid-stat"><dt style="color:#8C6B4F;">Premios</dt><dd>Café gratis 6ª</dd></div>
+              <div class="fid-stat"><dt style="color:#8C6B4F;">Sellos</dt><dd>1</dd></div>
+            </dl>
+            <div class="fid-qr"><svg><use href="#fid-i-qr"/></svg></div>
+          </div>
+          <div class="fid-dots">
+            <span style="background:rgba(138,90,52,.25);"></span>
+            <span style="background:rgba(138,90,52,.25);"></span>
+            <span style="background:rgba(138,90,52,.7);"></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
     <div class="wallet-demo-card reveal">
       <button id="walletDemoBtn" class="btn btn-primary" type="button">Agregar tarjeta demo a mi Wallet</button>
       <p>Funciona en iPhone (Apple Wallet) y Android (Google Wallet).</p>
