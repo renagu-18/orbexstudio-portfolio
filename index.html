@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
 
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DL0L5EWTR"></script>
@@ -22,437 +23,13 @@
   gtag('js', new Date());
   gtag('config', 'G-7DL0L5EWTR');
 </script>
-
-<style>
-  :root{
-    --color-primary:#0C3C66;
-    --color-accent:#2E75B6;
-    --color-ink:#0A1F33;
-    --color-terra:#D98C3F;
-    --color-paper:#F6F3EC;
-    --color-paper-alt:#EDE9DF;
-    --font-serif:'Playfair Display', Georgia, serif;
-    --font-sans:'DM Sans', -apple-system, sans-serif;
-    --nav-h:76px;
-    --ease:cubic-bezier(.22,.61,.36,1);
-  }
-
-  *,*::before,*::after{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; scroll-padding-top:var(--nav-h); }
-  body{
-    margin:0;
-    font-family:var(--font-sans);
-    color:var(--color-ink);
-    background:var(--color-paper);
-    line-height:1.6;
-    overflow-x:hidden;
-  }
-  img{ max-width:100%; display:block; }
-  a{ color:inherit; text-decoration:none; }
-  ul{ margin:0; padding:0; list-style:none; }
-  h1,h2,h3{ font-family:var(--font-serif); font-weight:600; margin:0; }
-  section{ position:relative; }
-  .container{ max-width:1180px; margin:0 auto; padding:0 24px; }
-
-  .eyebrow{
-    display:inline-block;
-    font-size:.78rem;
-    letter-spacing:.22em;
-    text-transform:uppercase;
-    color:var(--color-terra);
-    font-weight:700;
-    margin-bottom:14px;
-  }
-  .section-head{ max-width:640px; margin-bottom:56px; }
-  .section-head h2{ font-size:clamp(1.8rem,3.4vw,2.6rem); }
-  .section-head p{ margin-top:14px; font-size:1.05rem; opacity:.8; }
-  .section-head.center{ margin-left:auto; margin-right:auto; text-align:center; }
-
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:var(--font-sans); font-weight:700; font-size:.95rem;
-    padding:14px 28px; border-radius:999px; border:1.5px solid transparent;
-    cursor:pointer; transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease), color .25s var(--ease);
-    white-space:nowrap;
-  }
-  .btn-primary{ background:var(--color-terra); color:#fff; }
-  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 24px -8px rgba(217,140,63,.6); }
-  .btn-outline{ border-color:rgba(255,255,255,.55); color:#fff; }
-  .btn-outline:hover{ background:rgba(255,255,255,.12); transform:translateY(-2px); }
-  .btn-dark{ background:var(--color-primary); color:#fff; }
-  .btn-dark:hover{ background:var(--color-ink); transform:translateY(-2px); }
-
-  /* ---------- reveal on scroll ---------- */
-  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
-  .reveal.visible{ opacity:1; transform:none; }
-  @media (prefers-reduced-motion:reduce){
-    html{ scroll-behavior:auto; }
-    .reveal{ opacity:1; transform:none; transition:none; }
-    *{ animation:none !important; }
-  }
-
-  /* ---------- logo ---------- */
-  .logo{ display:flex; align-items:center; gap:0; color:#fff; }
-  .logo svg{ height:44px; width:auto; overflow:visible; }
-  .logo .logo-word{ font-family:var(--font-serif); }
-  .logo .logo-sub{ font-family:var(--font-sans); }
-
-  /* ---------- nav ---------- */
-  header{
-    position:fixed; top:0; left:0; right:0; z-index:100;
-    height:var(--nav-h);
-    display:flex; align-items:center;
-    background:transparent;
-    transition:background .35s var(--ease), backdrop-filter .35s var(--ease), box-shadow .35s var(--ease);
-  }
-  header.scrolled{
-    background:rgba(12,60,102,.97);
-    backdrop-filter:blur(10px);
-    box-shadow:0 8px 30px -12px rgba(0,0,0,.4);
-  }
-  header .container{ display:flex; align-items:center; justify-content:space-between; width:100%; }
-  .nav-links{ display:flex; gap:38px; align-items:center; }
-  .nav-links a{
-    color:#fff; font-weight:500; font-size:.95rem; opacity:.88;
-    position:relative; padding:4px 0;
-    transition:opacity .2s var(--ease);
-  }
-  .nav-links a::after{
-    content:''; position:absolute; left:0; bottom:-3px; width:0; height:1px;
-    background:var(--color-terra); transition:width .3s var(--ease);
-  }
-  .nav-links a:hover{ opacity:1; }
-  .nav-links a:hover::after{ width:100%; }
-  .nav-cta{ display:flex; align-items:center; gap:22px; }
-  .nav-toggle{
-    display:none; background:none; border:none; cursor:pointer; padding:6px;
-    flex-direction:column; gap:5px;
-  }
-  .nav-toggle span{ width:24px; height:2px; background:#fff; display:block; border-radius:2px; }
-
-  /* ---------- hero ---------- */
-  .hero{
-    background:var(--color-primary);
-    padding:calc(var(--nav-h) + 96px) 0 90px;
-    min-height:92vh;
-    display:flex; align-items:center;
-    overflow:hidden;
-  }
-  .hero-orbit{ position:absolute; inset:0; pointer-events:none; opacity:.35; }
-  .hero-inner{ position:relative; z-index:2; text-align:center; margin:0 auto; max-width:820px; }
-  .hero .eyebrow{ color:var(--color-terra); }
-  .hero h1{
-    color:#fff; font-size:clamp(2.4rem,5.6vw,4.1rem); line-height:1.12;
-    margin-bottom:22px;
-  }
-  .hero p.subtitle{
-    color:#D9E3EC; font-size:clamp(1.02rem,1.6vw,1.2rem); max-width:600px;
-    margin:0 auto 40px;
-  }
-  .hero-ctas{ display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-bottom:70px; }
-  .hero-stats{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
-    border-top:1px solid rgba(255,255,255,.16); padding-top:36px;
-  }
-  .hero-stats .stat-num{
-    font-family:var(--font-serif); color:#fff; font-size:clamp(1.6rem,2.6vw,2.2rem);
-  }
-  .hero-stats .stat-label{ color:#B9CADA; font-size:.88rem; margin-top:6px; }
-
-  /* ---------- orbital divider ---------- */
-  .orbit-divider{ display:flex; justify-content:center; padding:0 0; }
-  .orbit-divider svg{ display:block; }
-
-  /* ---------- services ---------- */
-  .services{ background:var(--color-paper); padding:120px 0; }
-  .services-grid{
-    display:grid; grid-template-columns:repeat(2,1fr); gap:28px;
-  }
-  .card{
-    background:#fff; border-radius:18px; padding:38px 34px;
-    border:1px solid rgba(10,31,51,.08);
-    position:relative; overflow:hidden;
-    transition:transform .35s var(--ease), box-shadow .35s var(--ease);
-  }
-  .card::after{
-    content:''; position:absolute; inset:0; border-radius:18px;
-    border:1.5px solid var(--color-accent); opacity:0; transform:scale(.92);
-    transition:opacity .4s var(--ease), transform .4s var(--ease);
-    pointer-events:none;
-  }
-  .card:hover{ transform:translateY(-6px); box-shadow:0 24px 44px -22px rgba(12,60,102,.28); }
-  .card:hover::after{ opacity:1; transform:scale(1); }
-  .card-icon{ margin-bottom:20px; color:var(--color-accent); }
-  .card h3{ font-size:1.28rem; margin-bottom:12px; color:var(--color-primary); }
-  .card p{ opacity:.78; font-size:.98rem; }
-
-  /* ---------- demo fidelización ---------- */
-  .fidelizacion{ background:var(--color-paper); padding:100px 0; text-align:center; position:relative; overflow:hidden; }
-  .fidelizacion .fid-ring{
-    position:absolute; right:-180px; top:-160px; width:640px; height:640px;
-    opacity:.14; pointer-events:none;
-  }
-  .wallet-demo-card{
-    max-width:480px; margin:36px auto 0; background:#fff; border-radius:18px;
-    padding:40px 34px; border:1px solid rgba(10,31,51,.08);
-  }
-  .wallet-demo-card p{ opacity:.78; font-size:.95rem; margin-top:8px; }
-  .wallet-demo-card .btn{ margin-top:6px; }
-  .wallet-demo-card .btn:disabled{ opacity:.6; cursor:not-allowed; transform:none; box-shadow:none; }
-  .wallet-demo-error{ margin-top:14px; color:#B3261E; font-size:.92rem; }
-
-  /* ---- tarjetas de ejemplo dentro de un mock-up de Wallet ---- */
-  .fid-row{ position:relative; max-width:640px; margin:0 auto; height:480px; z-index:2; }
-  .fid-phone{
-    position:absolute; width:216px; height:452px; border-radius:34px;
-    background:#0A1F33; padding:10px; box-sizing:border-box;
-    box-shadow:0 24px 40px -12px rgba(10,31,51,.35);
-    transition:transform .35s var(--ease), box-shadow .35s var(--ease);
-    cursor:pointer;
-  }
-  .fid-phone:hover{ box-shadow:0 34px 54px -10px rgba(10,31,51,.45); z-index:9; }
-  .fid-phone--a{ left:0; top:56px; transform:rotate(-9deg); }
-  .fid-phone--a:hover{ transform:rotate(-9deg) translateY(-18px) scale(1.03); }
-  .fid-phone--b{ left:190px; top:0; transform:rotate(0deg); z-index:5; }
-  .fid-phone--b:hover{ transform:translateY(-18px) scale(1.03); }
-  .fid-phone--c{ left:380px; top:56px; transform:rotate(9deg); }
-  .fid-phone--c:hover{ transform:rotate(9deg) translateY(-18px) scale(1.03); }
-
-  .fid-screen{
-    width:100%; height:100%; border-radius:26px; overflow:hidden;
-    display:flex; flex-direction:column; box-sizing:border-box;
-  }
-  .fid-notch{ width:64px; height:6px; border-radius:3px; background:rgba(255,255,255,.25); margin:10px auto 0; }
-  .fid-card{ margin:16px 14px 0; border-radius:16px; padding:16px; box-sizing:border-box; flex-shrink:0; text-align:left; }
-
-  .fid-icon-row{ display:flex; align-items:center; gap:9px; margin-bottom:16px; }
-  .fid-icon{
-    width:30px; height:30px; border-radius:9px; flex-shrink:0;
-    display:flex; align-items:center; justify-content:center;
-    background:rgba(255,255,255,.08);
-  }
-  .fid-icon svg{ width:18px; height:18px; }
-  .fid-icon--letter{ background:none; font-family:var(--font-serif); font-weight:700; font-size:19px; }
-  .fid-brand-name strong{ display:block; font-family:var(--font-serif); font-size:14px; line-height:1.2; }
-  .fid-brand-name span{ display:block; font-family:var(--font-sans); font-size:9px; letter-spacing:.12em; text-transform:uppercase; opacity:.65; margin-top:2px; }
-
-  .fid-stamps{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
-  .fid-stamp{ aspect-ratio:1; border-radius:50%; box-sizing:border-box; display:flex; align-items:center; justify-content:center; }
-  .fid-stamp svg{ width:50%; height:50%; }
-  .fid-stamp.is-empty{ border:1.4px dashed; background:transparent; }
-  .fid-stamp.is-next{ animation:fid-pulse 1.8s ease-in-out infinite; }
-  @keyframes fid-pulse{
-    0%,100%{ box-shadow:0 0 0 0 rgba(217,140,63,.4); }
-    50%{ box-shadow:0 0 0 6px rgba(217,140,63,0); }
-  }
-
-  .fid-stats{ display:flex; justify-content:space-between; gap:8px; margin:0 0 16px; padding-top:12px; border-top:1px solid rgba(255,255,255,.14); }
-  .fid-stat{ min-width:0; }
-  .fid-stat dt{ margin:0 0 3px; font-family:var(--font-sans); font-size:8px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; opacity:.6; }
-  .fid-stat dd{ margin:0; font-family:var(--font-sans); font-size:12px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-
-  .fid-qr{ width:74px; height:74px; margin:0 auto; background:#fff; border-radius:6px; padding:5px; box-sizing:border-box; }
-  .fid-qr svg{ width:100%; height:100%; display:block; }
-
-  .fid-dots{ display:flex; justify-content:center; gap:5px; margin-top:14px; }
-  .fid-dots span{ width:5px; height:5px; border-radius:50%; }
-
-  .fid-tag{
-    position:absolute; top:-10px; left:50%; transform:translateX(-50%);
-    background:#0A1F33; color:#F6F3EC; font-size:10px; letter-spacing:.06em;
-    text-transform:uppercase; padding:4px 10px; border-radius:999px; white-space:nowrap;
-  }
-  .fid-tag--active{ background:var(--color-terra); }
-
-  @media (max-width:680px){
-    .fid-row{
-      display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory;
-      height:auto; padding:24px 4px 8px; -webkit-overflow-scrolling:touch;
-    }
-    .fid-phone{ position:static; transform:none !important; flex:0 0 auto; scroll-snap-align:center; }
-    .fid-phone:hover{ transform:none !important; }
-  }
-
-  /* ---------- portfolio ---------- */
-  .portfolio{ background:var(--color-paper-alt); padding:120px 0; }
-  .portfolio-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:32px; }
-  .proj-card.oculto{ display:none; }
-  .proj-card{
-    background:#fff; border-radius:18px; overflow:hidden;
-    border:1px solid rgba(10,31,51,.08);
-    position:relative;
-    transition:transform .35s var(--ease), box-shadow .35s var(--ease);
-    display:flex; flex-direction:column;
-  }
-  .proj-card::after{
-    content:''; position:absolute; inset:0; border-radius:18px;
-    border:1.5px solid var(--color-terra); opacity:0; transform:scale(.94);
-    transition:opacity .4s var(--ease), transform .4s var(--ease);
-    pointer-events:none;
-  }
-  .proj-card:hover{ transform:translateY(-6px); box-shadow:0 24px 44px -22px rgba(12,60,102,.28); }
-  .proj-card:hover::after{ opacity:1; transform:scale(1); }
-  .proj-thumb{
-    height:220px; display:flex; flex-direction:column; gap:8px;
-    padding:14px; box-sizing:border-box;
-  }
-  .proj-thumb-caption{
-    margin:0; font-size:.7rem; line-height:1.4; text-align:center;
-    color:rgba(0,0,0,.55); font-weight:500; padding:0 6px;
-  }
-
-  /* ---------- mockup preview (portfolio hover) ---------- */
-  .mockup-window{
-    flex:1; border-radius:10px; overflow:hidden;
-    display:flex; flex-direction:column;
-    box-shadow:0 8px 20px -10px rgba(0,0,0,.35);
-  }
-  .mockup-bar{
-    flex-shrink:0; height:18px; display:flex; align-items:center; gap:4px;
-    padding:0 8px; background:rgba(255,255,255,.35);
-  }
-  .mockup-bar span{ width:6px; height:6px; border-radius:50%; background:rgba(0,0,0,.28); }
-  .mockup-scene{ flex:1; position:relative; overflow:hidden; background:rgba(255,255,255,.5); }
-  .mockup-scene-inner{
-    position:absolute; inset:0; display:flex; flex-direction:column; gap:8px;
-    padding:10px; transition:transform .9s var(--ease);
-  }
-  .mockup-block{ flex-shrink:0; height:16px; border-radius:5px; background:var(--proj-accent,#0C3C66); opacity:.32; }
-  .mockup-block.mockup-hero{ height:44px; opacity:.45; }
-  @media (hover:hover) and (pointer:fine){
-    .proj-card:hover .mockup-scene-inner{ transform:translateY(-70px); }
-  }
-  @media (prefers-reduced-motion:reduce){
-    .mockup-scene-inner{ transition:none; }
-  }
-
-  .proj-body{ padding:26px 26px 30px; display:flex; flex-direction:column; gap:12px; flex:1; }
-  .proj-badge{
-    align-self:flex-start; background:var(--color-paper-alt); color:var(--color-primary);
-    font-size:.74rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
-    padding:5px 12px; border-radius:999px;
-  }
-  .proj-body h3{ font-size:1.22rem; color:var(--color-primary); }
-  .proj-tags{ display:flex; flex-wrap:wrap; gap:8px; }
-  .proj-tags span{
-    font-size:.74rem; background:rgba(46,117,182,.1); color:var(--color-accent);
-    padding:4px 10px; border-radius:999px; font-weight:500;
-  }
-  .proj-body p.desc{ font-size:.92rem; opacity:.78; flex:1; }
-  .proj-link{
-    font-weight:700; color:var(--color-terra); font-size:.92rem;
-    display:inline-flex; align-items:center; gap:6px; margin-top:auto;
-    transition:gap .25s var(--ease);
-  }
-  .proj-link:hover{ gap:10px; }
-  .proj-link.disabled{ color:rgba(10,31,51,.35); pointer-events:none; }
-
-  /* ---------- proceso ---------- */
-  .proceso{ background:var(--color-primary); padding:120px 0; color:#fff; }
-  .proceso .section-head p{ color:#C7D5E2; }
-  .steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; position:relative; }
-  .step{ position:relative; padding:0 18px; text-align:left; }
-  .step-num{
-    font-family:var(--font-serif); font-size:1.1rem; color:var(--color-terra);
-    width:42px; height:42px; border:1.5px solid var(--color-terra); border-radius:50%;
-    display:flex; align-items:center; justify-content:center; margin-bottom:22px;
-  }
-  .step h3{ font-size:1.12rem; margin-bottom:10px; color:#fff; }
-  .step p{ color:#C7D5E2; font-size:.92rem; }
-  .step-connector{
-    display:none;
-    position:absolute; top:21px; left:-50%; width:100%; height:14px;
-  }
-  .step:not(:first-child) .step-connector{ display:block; }
-
-  /* ---------- contacto ---------- */
-  .contacto{ background:var(--color-paper); padding:120px 0; }
-  .contact-grid{ display:grid; grid-template-columns:.85fr 1.15fr; gap:60px; }
-  .contact-info{ display:flex; flex-direction:column; gap:22px; }
-  .contact-info .whatsapp-btn{ align-self:flex-start; }
-  .contact-line{ display:flex; align-items:center; gap:12px; font-size:.98rem; }
-  .contact-line svg{ color:var(--color-accent); flex-shrink:0; }
-  .contact-note{ font-family:var(--font-serif); font-style:italic; font-size:1.15rem; color:var(--color-primary); margin-top:10px; }
-
-  form{ display:flex; flex-direction:column; gap:18px; }
-  .field{ display:flex; flex-direction:column; gap:8px; }
-  .field label{ font-size:.85rem; font-weight:700; color:var(--color-primary); }
-  .field input, .field select, .field textarea{
-    font-family:var(--font-sans); font-size:.98rem; padding:14px 16px;
-    border:1.5px solid rgba(10,31,51,.16); border-radius:10px;
-    background:#fff; color:var(--color-ink);
-    transition:border-color .25s var(--ease), box-shadow .25s var(--ease);
-  }
-  .field input:focus, .field select:focus, .field textarea:focus{
-    outline:none; border-color:var(--color-accent); box-shadow:0 0 0 3px rgba(46,117,182,.15);
-  }
-  .field textarea{ resize:vertical; min-height:110px; }
-
-  /* ---------- footer ---------- */
-  footer{ background:var(--color-ink); color:#fff; padding:70px 0 30px; position:relative; overflow:hidden; }
-  .footer-orbit{ position:absolute; inset:0; opacity:.08; pointer-events:none; }
-  .footer-top{
-    display:flex; justify-content:space-between; align-items:flex-start;
-    flex-wrap:wrap; gap:40px; position:relative; z-index:1;
-    padding-bottom:36px; border-bottom:1px solid rgba(255,255,255,.12);
-  }
-  .footer-tagline{ color:#9FB0C0; max-width:280px; font-size:.95rem; }
-  .footer-links{ display:flex; gap:32px; }
-  .footer-links a{ color:#C7D5E2; font-size:.92rem; transition:color .2s var(--ease); }
-  .footer-links a:hover{ color:var(--color-terra); }
-  .footer-bottom{
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
-    padding-top:26px; font-size:.82rem; color:#7C8FA0; position:relative; z-index:1;
-  }
-
-  /* ---------- floating whatsapp ---------- */
-  .float-whatsapp{
-    position:fixed; bottom:26px; right:26px; z-index:200;
-    width:60px; height:60px; border-radius:50%;
-    background:#25D366; color:#fff;
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 10px 26px -8px rgba(0,0,0,.4);
-  }
-  .float-whatsapp::before{
-    content:''; position:absolute; inset:0; border-radius:50%;
-    background:#25D366; animation:pulse 2.2s infinite;
-    z-index:-1;
-  }
-  @keyframes pulse{
-    0%{ transform:scale(1); opacity:.65; }
-    100%{ transform:scale(1.8); opacity:0; }
-  }
-  @media (prefers-reduced-motion:reduce){ .float-whatsapp::before{ animation:none; } }
-
-  /* ---------- responsive ---------- */
-  @media (max-width:980px){
-    .services-grid{ grid-template-columns:1fr; }
-    .portfolio-grid{ grid-template-columns:repeat(2,1fr); }
-    .steps{ grid-template-columns:repeat(2,1fr); row-gap:44px; }
-    .step-connector{ display:none !important; }
-    .contact-grid{ grid-template-columns:1fr; }
-  }
-  @media (max-width:720px){
-    .nav-links, .nav-cta .btn-outline-cta{ display:none; }
-    header.nav-open .nav-links{
-      display:flex; position:absolute; top:var(--nav-h); left:0; right:0;
-      background:rgba(12,60,102,.97); backdrop-filter:blur(10px);
-      flex-direction:column; padding:22px 24px; gap:20px;
-    }
-    .nav-toggle{ display:flex; }
-    .portfolio-grid{ grid-template-columns:1fr; }
-    .hero-stats{ grid-template-columns:1fr; gap:20px; text-align:center; }
-    .steps{ grid-template-columns:1fr; }
-    .hero{ text-align:center; }
-  }
-</style>
 </head>
 <body>
 
 <!-- ============ NAV ============ -->
 <header id="siteHeader">
   <div class="container">
-    <a href="#top" class="logo" aria-label="OrbexStudio - inicio">
+    <a href="/" class="logo" aria-label="OrbexStudio - inicio">
       <svg viewBox="0 0 190 66" role="img" aria-hidden="true">
         <ellipse cx="95" cy="24" rx="72" ry="17" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".55" transform="rotate(-14 95 24)"/>
         <text class="logo-word" x="6" y="35" font-size="32" fill="currentColor">orbex</text>
@@ -460,10 +37,11 @@
       </svg>
     </a>
     <nav class="nav-links">
-      <a href="#servicios">Servicios</a>
-      <a href="#portafolio">Portafolio</a>
-      <a href="#proceso">Proceso</a>
-      <a href="#contacto">Contacto</a>
+      <a href="/" class="active">Inicio</a>
+      <a href="/nosotros">Nosotros</a>
+      <a href="/servicios">Servicios</a>
+      <a href="/proyectos">Proyectos</a>
+      <a href="/contacto">Contacto</a>
     </nav>
     <div class="nav-cta">
       <a href="https://wa.me/56979282151" target="_blank" rel="noopener" class="btn btn-primary btn-outline-cta">WhatsApp</a>
@@ -487,19 +65,19 @@
     <h1 class="reveal">Sitios web que trabajan por tu negocio</h1>
     <p class="subtitle reveal">Diseño profesional, automatizaciones y presencia en Google para negocios locales en Santiago.</p>
     <div class="hero-ctas reveal">
-      <a href="#portafolio" class="btn btn-primary">Ver portafolio</a>
-      <a href="#servicios" class="btn btn-outline">Conoce los servicios</a>
+      <a href="/proyectos" class="btn btn-primary">Ver portafolio</a>
+      <a href="/servicios" class="btn btn-outline">Conoce los servicios</a>
     </div>
     <div class="hero-stats reveal">
-      <div class="stat"><div class="stat-num">+8</div><div class="stat-label">proyectos entregados</div></div>
-      <div class="stat"><div class="stat-num">3</div><div class="stat-label">rubros distintos</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-label">proyectos entregados</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-label">rubros distintos</div></div>
       <div class="stat"><div class="stat-num">San Miguel → Santiago</div><div class="stat-label">alcance de trabajo</div></div>
     </div>
   </div>
 </section>
 
-<!-- ============ SERVICIOS ============ -->
-<section class="services" id="servicios">
+<!-- ============ SERVICIOS (resumen) ============ -->
+<section class="services" id="servicios-preview">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Lo que hacemos</span>
@@ -515,7 +93,7 @@
           </svg>
         </div>
         <h3>Sitio profesional</h3>
-        <p>Landing de una página para profesionales independientes: contadores, abogados, terapeutas. Presentación clara y contacto directo desde el primer clic.</p>
+        <p>Landing de una página con contacto directo desde el primer clic.</p>
       </div>
 
       <div class="card reveal">
@@ -528,7 +106,7 @@
           </svg>
         </div>
         <h3>Sitio con reservas y catálogo</h3>
-        <p>Para peluquerías, restaurantes y talleres: catálogo de servicios o menú, horarios y agenda o reserva integrada, conectado a WhatsApp.</p>
+        <p>Catálogo, horarios y agenda conectada a WhatsApp.</p>
       </div>
 
       <div class="card reveal">
@@ -539,7 +117,7 @@
           </svg>
         </div>
         <h3>Tienda online</h3>
-        <p>Catálogo de productos con carrito y cobro directo en el sitio, para negocios que quieren cerrar la venta sin salir a WhatsApp.</p>
+        <p>Catálogo de productos con carrito y cobro directo en el sitio.</p>
       </div>
 
       <div class="card reveal">
@@ -551,15 +129,18 @@
           </svg>
         </div>
         <h3>Automatización y fidelización</h3>
-        <p>Add-on para cualquiera de los paquetes anteriores: recordatorios automáticos, seguimiento de clientes y flujos con n8n para que vuelvan a comprar.</p>
+        <p>Recordatorios, seguimiento de clientes y fidelización con n8n.</p>
       </div>
 
     </div>
+    <p style="text-align:center;margin-top:40px;">
+      <a href="/servicios" class="proj-link" style="justify-content:center;">Ver todos los servicios →</a>
+    </p>
   </div>
 </section>
 
-<!-- ============ PORTAFOLIO ============ -->
-<section class="portfolio" id="portafolio">
+<!-- ============ PROYECTOS (preview) ============ -->
+<section class="portfolio" id="proyectos-preview">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Proyectos</span>
@@ -567,7 +148,7 @@
       <p>Demos de presentación — cada sitio adaptado al rubro y al cliente.</p>
     </div>
 
-    <div class="portfolio-grid">
+    <div class="portfolio-grid portfolio-grid--preview">
 
       <article class="proj-card reveal">
         <div class="proj-thumb" style="background:#141414;">
@@ -593,7 +174,7 @@
           <span class="proj-badge">Gimnasio personalizado</span>
           <h3>VitalGym</h3>
           <div class="proj-tags"><span>Landing</span><span>Planes y horarios</span><span>WhatsApp</span></div>
-          <p class="desc">Gimnasio en casa con entrenamiento 100% personalizado en San Miguel: grupos de máximo 3 personas, seguimiento de progreso y clase de prueba agendada por WhatsApp.</p>
+          <p class="desc">Gimnasio en casa con entrenamiento 100% personalizado en San Miguel, grupos de máximo 3 personas y clase de prueba por WhatsApp.</p>
           <a href="https://www.vitalgym.cl" target="_blank" rel="noopener" class="proj-link">Ver demo →</a>
         </div>
       </article>
@@ -622,37 +203,8 @@
           <span class="proj-badge">Podología a domicilio</span>
           <h3>NissiFoot</h3>
           <div class="proj-tags"><span>Sitio informativo</span><span>WhatsApp</span><span>SEO local</span></div>
-          <p class="desc">Atención profesional de podología a domicilio en Santiago: uñas, callosidades, hongos y cuidado regular del pie, agendando por WhatsApp.</p>
+          <p class="desc">Atención profesional de podología a domicilio en Santiago, agendando por WhatsApp.</p>
           <a href="https://nissifoot.vercel.app" target="_blank" rel="noopener" class="proj-link">Ver demo →</a>
-        </div>
-      </article>
-
-      <article class="proj-card reveal">
-        <div class="proj-thumb" style="background:#E7EEF6;">
-          <div class="mockup-window">
-            <div class="mockup-bar"><span></span><span></span><span></span></div>
-            <div class="mockup-scene">
-              <div class="mockup-scene-inner" style="--proj-accent:#B8862F;">
-                <div class="mockup-block mockup-hero"></div>
-                <div class="mockup-block"></div>
-                <div class="mockup-block"></div>
-                <div class="mockup-block"></div>
-                <div class="mockup-block"></div>
-                <div class="mockup-block"></div>
-                <div class="mockup-block"></div>
-                <div class="mockup-block"></div>
-                <div class="mockup-block"></div>
-              </div>
-            </div>
-          </div>
-          <p class="proj-thumb-caption">Foto: pantallazo de Moizlicious — catálogo de repostería y pedidos</p>
-        </div>
-        <div class="proj-body">
-          <span class="proj-badge">Repostería artesanal</span>
-          <h3>Moizlicious</h3>
-          <div class="proj-tags"><span>E-commerce</span><span>WhatsApp</span><span>SEO</span></div>
-          <p class="desc">Tienda online de repostería con catálogo de productos y pedido directo por WhatsApp.</p>
-          <a href="https://moizlicious.vercel.app" target="_blank" rel="noopener" class="proj-link">Ver demo →</a>
         </div>
       </article>
 
@@ -680,207 +232,15 @@
           <span class="proj-badge">Salón de belleza y peluquería</span>
           <h3>Nua Salon</h3>
           <div class="proj-tags"><span>Sitio informativo</span><span>Reservas WhatsApp</span><span>SEO local</span></div>
-          <p class="desc">Salón de belleza con servicios de corte, color y tratamientos capilares, con reserva de hora directa por WhatsApp.</p>
+          <p class="desc">Salón de belleza con reserva de hora directa por WhatsApp.</p>
           <a href="https://nua-salon-demo.vercel.app/" target="_blank" rel="noopener" class="proj-link">Ver demo →</a>
         </div>
       </article>
 
     </div>
-  </div>
-</section>
-
-<!-- ============ DEMO FIDELIZACIÓN ============ -->
-<section class="fidelizacion" id="demo-fidelizacion">
-  <svg class="fid-ring" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <circle cx="320" cy="320" r="300" fill="none" stroke="#2E75B6" stroke-width="1.5"/>
-    <circle cx="320" cy="320" r="230" fill="none" stroke="#0C3C66" stroke-width="1"/>
-    <circle cx="320" cy="320" r="150" fill="none" stroke="#D98C3F" stroke-width="1"/>
-  </svg>
-
-  <!-- Sprite de íconos, oculto. Reutilizado por las 3 tarjetas via <use>. -->
-  <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
-    <defs>
-      <!-- Sellos: planeta con anillo (identidad OrbexStudio) -->
-      <symbol id="fid-i-planet" viewBox="0 0 24 24">
-        <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
-          <ellipse cx="12" cy="13" rx="9.4" ry="3.4" transform="rotate(-16 12 13)" />
-          <circle cx="12" cy="10.5" r="5.1" />
-          <path d="M7.6 9.2c1.4.9 2.9 1.3 4.4 1.3s3-.4 4.4-1.3" stroke-width="1" opacity=".85" />
-          <path d="M8.2 12.4c1.2.6 2.5.9 3.8.9s2.6-.3 3.8-.9" stroke-width="1" opacity=".85" />
-        </g>
-      </symbol>
-      <!-- Sellos: tijeras (barbería) -->
-      <symbol id="fid-i-scissors" viewBox="0 0 24 24">
-        <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="6" cy="6" r="2.4"/>
-          <circle cx="6" cy="18" r="2.4"/>
-          <line x1="8.2" y1="7.6" x2="20" y2="18"/>
-          <line x1="8.2" y1="16.4" x2="20" y2="6"/>
-        </g>
-      </symbol>
-      <!-- Sellos: vaso/taza (cafetería) -->
-      <symbol id="fid-i-cup" viewBox="0 0 24 24">
-        <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6.5 5h11l-1.3 12.2a2.4 2.4 0 0 1-2.4 2.1h-3.6a2.4 2.4 0 0 1-2.4-2.1L6.5 5z"/>
-          <line x1="5" y1="5" x2="19" y2="5"/>
-        </g>
-      </symbol>
-      <!-- Código QR falso (decorativo, no escaneable) -->
-      <symbol id="fid-i-qr" viewBox="0 0 63 63">
-        <rect width="63" height="63" fill="#fff"/>
-        <g fill="#141414">
-          <rect x="0" y="0" width="21" height="21"/><rect x="3" y="3" width="15" height="15" fill="#fff"/><rect x="6" y="6" width="9" height="9"/>
-          <rect x="42" y="0" width="21" height="21"/><rect x="45" y="3" width="15" height="15" fill="#fff"/><rect x="48" y="6" width="9" height="9"/>
-          <rect x="0" y="42" width="21" height="21"/><rect x="3" y="45" width="15" height="15" fill="#fff"/><rect x="6" y="48" width="9" height="9"/>
-          <rect x="27" y="0" width="3" height="3"/><rect x="36" y="0" width="3" height="3"/>
-          <rect x="24" y="3" width="3" height="3"/><rect x="36" y="3" width="3" height="3"/>
-          <rect x="30" y="6" width="3" height="3"/><rect x="33" y="6" width="3" height="3"/><rect x="36" y="6" width="3" height="3"/>
-          <rect x="24" y="9" width="3" height="3"/>
-          <rect x="21" y="15" width="3" height="3"/><rect x="30" y="15" width="3" height="3"/><rect x="39" y="15" width="3" height="3"/>
-          <rect x="21" y="18" width="3" height="3"/><rect x="33" y="18" width="3" height="3"/>
-          <rect x="15" y="21" width="3" height="3"/><rect x="18" y="21" width="3" height="3"/><rect x="21" y="21" width="3" height="3"/><rect x="39" y="21" width="3" height="3"/><rect x="42" y="21" width="3" height="3"/><rect x="60" y="21" width="3" height="3"/>
-          <rect x="3" y="24" width="3" height="3"/><rect x="9" y="24" width="3" height="3"/><rect x="30" y="24" width="3" height="3"/><rect x="36" y="24" width="3" height="3"/><rect x="42" y="24" width="3" height="3"/><rect x="48" y="24" width="3" height="3"/><rect x="54" y="24" width="3" height="3"/>
-          <rect x="0" y="27" width="3" height="3"/><rect x="33" y="27" width="3" height="3"/><rect x="36" y="27" width="3" height="3"/><rect x="39" y="27" width="3" height="3"/><rect x="42" y="27" width="3" height="3"/><rect x="45" y="27" width="3" height="3"/>
-          <rect x="6" y="30" width="3" height="3"/><rect x="15" y="30" width="3" height="3"/><rect x="24" y="30" width="3" height="3"/><rect x="33" y="30" width="3" height="3"/><rect x="42" y="30" width="3" height="3"/><rect x="51" y="30" width="3" height="3"/><rect x="60" y="30" width="3" height="3"/>
-          <rect x="6" y="33" width="3" height="3"/><rect x="18" y="33" width="3" height="3"/><rect x="27" y="33" width="3" height="3"/><rect x="30" y="33" width="3" height="3"/><rect x="39" y="33" width="3" height="3"/><rect x="51" y="33" width="3" height="3"/>
-          <rect x="0" y="36" width="3" height="3"/><rect x="3" y="36" width="3" height="3"/><rect x="6" y="36" width="3" height="3"/><rect x="24" y="36" width="3" height="3"/><rect x="27" y="36" width="3" height="3"/><rect x="45" y="36" width="3" height="3"/><rect x="48" y="36" width="3" height="3"/><rect x="51" y="36" width="3" height="3"/>
-          <rect x="15" y="39" width="3" height="3"/><rect x="21" y="39" width="3" height="3"/><rect x="27" y="39" width="3" height="3"/><rect x="33" y="39" width="3" height="3"/><rect x="39" y="39" width="3" height="3"/><rect x="60" y="39" width="3" height="3"/>
-          <rect x="21" y="42" width="3" height="3"/><rect x="24" y="42" width="3" height="3"/><rect x="27" y="42" width="3" height="3"/><rect x="30" y="42" width="3" height="3"/>
-          <rect x="27" y="45" width="3" height="3"/><rect x="36" y="45" width="3" height="3"/><rect x="45" y="45" width="3" height="3"/><rect x="54" y="45" width="3" height="3"/>
-          <rect x="24" y="48" width="3" height="3"/><rect x="36" y="48" width="3" height="3"/><rect x="48" y="48" width="3" height="3"/><rect x="57" y="48" width="3" height="3"/><rect x="60" y="48" width="3" height="3"/>
-          <rect x="30" y="51" width="3" height="3"/><rect x="33" y="51" width="3" height="3"/><rect x="36" y="51" width="3" height="3"/><rect x="54" y="51" width="3" height="3"/><rect x="57" y="51" width="3" height="3"/>
-          <rect x="24" y="54" width="3" height="3"/><rect x="45" y="54" width="3" height="3"/><rect x="51" y="54" width="3" height="3"/><rect x="57" y="54" width="3" height="3"/>
-          <rect x="48" y="57" width="3" height="3"/><rect x="51" y="57" width="3" height="3"/><rect x="54" y="57" width="3" height="3"/><rect x="57" y="57" width="3" height="3"/><rect x="60" y="57" width="3" height="3"/>
-          <rect x="21" y="60" width="3" height="3"/><rect x="30" y="60" width="3" height="3"/><rect x="39" y="60" width="3" height="3"/><rect x="48" y="60" width="3" height="3"/><rect x="57" y="60" width="3" height="3"/>
-        </g>
-      </symbol>
-    </defs>
-  </svg>
-
-  <div class="container">
-    <div class="section-head center reveal">
-      <span class="eyebrow">Fidelización digital</span>
-      <h2>Tarjetas que tus clientes ya llevan encima</h2>
-      <p>Sellos digitales directo en Apple Wallet y Google Wallet. Prueba tú mismo la tarjeta de OrbexStudio.</p>
-    </div>
-
-    <div class="fid-row reveal">
-
-      <!-- Tarjeta A: Blackwood Barber (vitrina) -->
-      <div class="fid-phone fid-phone--a">
-        <span class="fid-tag">Ejemplo de cliente</span>
-        <div class="fid-screen" style="background:#141414; color:#E7C878;">
-          <div class="fid-notch"></div>
-          <div class="fid-card" style="background:#1C1A16; border:1px solid #C9A24B;">
-            <div class="fid-icon-row">
-              <div class="fid-icon fid-icon--letter">B</div>
-              <div class="fid-brand-name" style="color:#F1E2B8;">
-                <strong>Blackwood</strong>
-                <span style="color:#B9A98A;">Barber</span>
-              </div>
-            </div>
-            <div class="fid-stamps">
-              <div class="fid-stamp" style="background:#E7C878;"><svg style="color:#1C1A16;"><use href="#fid-i-scissors"/></svg></div>
-              <div class="fid-stamp" style="background:#E7C878;"><svg style="color:#1C1A16;"><use href="#fid-i-scissors"/></svg></div>
-              <div class="fid-stamp" style="background:#E7C878;"><svg style="color:#1C1A16;"><use href="#fid-i-scissors"/></svg></div>
-              <div class="fid-stamp" style="background:#E7C878;"><svg style="color:#1C1A16;"><use href="#fid-i-scissors"/></svg></div>
-              <div class="fid-stamp is-empty" style="border-color:#6B5F44; color:#6B5F44;"><svg><use href="#fid-i-scissors"/></svg></div>
-              <div class="fid-stamp is-empty" style="border-color:#6B5F44; color:#6B5F44;"><svg><use href="#fid-i-scissors"/></svg></div>
-            </div>
-            <dl class="fid-stats" style="color:#F1E2B8; border-color:rgba(231,200,120,.18);">
-              <div class="fid-stat"><dt style="color:#B9A98A;">Miembro</dt><dd>Invitado</dd></div>
-              <div class="fid-stat"><dt style="color:#B9A98A;">Premios</dt><dd>50% dcto. corte</dd></div>
-              <div class="fid-stat"><dt style="color:#B9A98A;">Sellos</dt><dd>4</dd></div>
-            </dl>
-            <div class="fid-qr"><svg><use href="#fid-i-qr"/></svg></div>
-          </div>
-          <div class="fid-dots">
-            <span style="background:rgba(231,200,120,.7);"></span>
-            <span style="background:rgba(231,200,120,.25);"></span>
-            <span style="background:rgba(231,200,120,.25);"></span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tarjeta B: OrbexStudio -->
-      <div class="fid-phone fid-phone--b">
-        <span class="fid-tag fid-tag--active">Nuestra tarjeta</span>
-        <div class="fid-screen" style="background:#0A1F33; color:#D98C3F;">
-          <div class="fid-notch"></div>
-          <div class="fid-card" style="background:#0C3C66; border:1px solid #2E75B6;">
-            <div class="fid-icon-row">
-              <div class="fid-icon" style="color:#D98C3F;"><svg><use href="#fid-i-planet"/></svg></div>
-              <div class="fid-brand-name" style="color:#F6F3EC;">
-                <strong>orbex</strong>
-                <span style="color:#BFD3E6;">studio</span>
-              </div>
-            </div>
-            <div class="fid-stamps">
-              <div class="fid-stamp" style="background:#D98C3F;"><svg style="color:#0A1F33;"><use href="#fid-i-planet"/></svg></div>
-              <div class="fid-stamp" style="background:#D98C3F;"><svg style="color:#0A1F33;"><use href="#fid-i-planet"/></svg></div>
-              <div class="fid-stamp" style="background:#D98C3F;"><svg style="color:#0A1F33;"><use href="#fid-i-planet"/></svg></div>
-              <div class="fid-stamp" style="background:#D98C3F;"><svg style="color:#0A1F33;"><use href="#fid-i-planet"/></svg></div>
-              <div class="fid-stamp is-empty is-next" style="border-color:#D98C3F; color:#D98C3F;"><svg><use href="#fid-i-planet"/></svg></div>
-              <div class="fid-stamp is-empty" style="border-color:#2E75B6; color:#2E75B6;"><svg><use href="#fid-i-planet"/></svg></div>
-            </div>
-            <dl class="fid-stats" style="color:#F6F3EC; border-color:rgba(246,243,236,.16);">
-              <div class="fid-stat"><dt style="color:#BFD3E6;">Miembro</dt><dd>Tú</dd></div>
-              <div class="fid-stat"><dt style="color:#BFD3E6;">Premios</dt><dd>Sorpresa al 6º</dd></div>
-              <div class="fid-stat"><dt style="color:#BFD3E6;">Sellos</dt><dd>4</dd></div>
-            </dl>
-            <div class="fid-qr"><svg><use href="#fid-i-qr"/></svg></div>
-          </div>
-          <div class="fid-dots">
-            <span style="background:rgba(191,211,230,.25);"></span>
-            <span style="background:rgba(191,211,230,.7);"></span>
-            <span style="background:rgba(191,211,230,.25);"></span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tarjeta C: Café Aurora (vitrina) -->
-      <div class="fid-phone fid-phone--c">
-        <span class="fid-tag">Ejemplo de cliente</span>
-        <div class="fid-screen" style="background:#FBF3EA; color:#8A5A34;">
-          <div class="fid-notch" style="background:rgba(10,31,51,.15);"></div>
-          <div class="fid-card" style="background:#EDD9BE; border:1px solid #C9A26B;">
-            <div class="fid-icon-row">
-              <div class="fid-icon" style="color:#8A5A34; background:rgba(138,90,52,.1);"><svg><use href="#fid-i-cup"/></svg></div>
-              <div class="fid-brand-name" style="color:#5A3A22;">
-                <strong>Café Aurora</strong>
-                <span style="color:#8C6B4F;">San Miguel</span>
-              </div>
-            </div>
-            <div class="fid-stamps">
-              <div class="fid-stamp" style="background:#8A5A34;"><svg style="color:#FBF3EA;"><use href="#fid-i-cup"/></svg></div>
-              <div class="fid-stamp is-empty" style="border-color:#C9A26B; color:#C9A26B;"><svg><use href="#fid-i-cup"/></svg></div>
-              <div class="fid-stamp is-empty" style="border-color:#C9A26B; color:#C9A26B;"><svg><use href="#fid-i-cup"/></svg></div>
-              <div class="fid-stamp is-empty" style="border-color:#C9A26B; color:#C9A26B;"><svg><use href="#fid-i-cup"/></svg></div>
-              <div class="fid-stamp is-empty" style="border-color:#C9A26B; color:#C9A26B;"><svg><use href="#fid-i-cup"/></svg></div>
-              <div class="fid-stamp is-empty" style="border-color:#C9A26B; color:#C9A26B;"><svg><use href="#fid-i-cup"/></svg></div>
-            </div>
-            <dl class="fid-stats" style="color:#5A3A22; border-color:rgba(138,90,52,.18);">
-              <div class="fid-stat"><dt style="color:#8C6B4F;">Miembro</dt><dd>Invitado</dd></div>
-              <div class="fid-stat"><dt style="color:#8C6B4F;">Premios</dt><dd>Café gratis 6ª</dd></div>
-              <div class="fid-stat"><dt style="color:#8C6B4F;">Sellos</dt><dd>1</dd></div>
-            </dl>
-            <div class="fid-qr"><svg><use href="#fid-i-qr"/></svg></div>
-          </div>
-          <div class="fid-dots">
-            <span style="background:rgba(138,90,52,.25);"></span>
-            <span style="background:rgba(138,90,52,.25);"></span>
-            <span style="background:rgba(138,90,52,.7);"></span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="wallet-demo-card reveal">
-      <button id="walletDemoBtn" class="btn btn-primary" type="button">Agregar tarjeta demo a mi Wallet</button>
-      <p>Funciona en iPhone (Apple Wallet) y Android (Google Wallet).</p>
-      <p id="walletDemoError" class="wallet-demo-error" hidden></p>
-    </div>
+    <p style="text-align:center;margin-top:40px;">
+      <a href="/proyectos" class="proj-link" style="justify-content:center;">Ver todos los proyectos →</a>
+    </p>
   </div>
 </section>
 
@@ -928,60 +288,17 @@
   </div>
 </section>
 
-<!-- ============ CONTACTO ============ -->
-<section class="contacto" id="contacto">
+<!-- ============ CTA FINAL ============ -->
+<section class="cta-final">
   <div class="container">
-    <div class="section-head reveal">
+    <div class="section-head center reveal">
       <span class="eyebrow">Hablemos</span>
       <h2>¿Listo para tener tu sitio web?</h2>
       <p>Cuéntame de tu negocio y te armo una propuesta sin costo.</p>
     </div>
-
-    <div class="contact-grid">
-      <div class="contact-info reveal">
-        <a href="https://wa.me/56979282151" target="_blank" rel="noopener" class="btn btn-primary whatsapp-btn">
-          Escríbeme por WhatsApp
-        </a>
-        <div class="contact-line">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-          nexodigitalsites@gmail.com
-        </div>
-        <div class="contact-line">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
-          San Miguel, Santiago
-        </div>
-        <p class="contact-note">Respondo el mismo día.</p>
-      </div>
-
-      <form id="contactForm" class="reveal">
-        <div class="field">
-          <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" name="nombre" required>
-        </div>
-        <div class="field">
-          <label for="contactoCliente">WhatsApp o email</label>
-          <input type="text" id="contactoCliente" name="contactoCliente" required>
-        </div>
-        <div class="field">
-          <label for="negocio">Tipo de negocio</label>
-          <input type="text" id="negocio" name="negocio" placeholder="Ej: peluquería, ferretería, café...">
-        </div>
-        <div class="field">
-          <label for="necesidad">¿Qué necesitas?</label>
-          <select id="necesidad" name="necesidad">
-            <option>Sitio web</option>
-            <option>Automatización</option>
-            <option>SEO</option>
-            <option>Mantención</option>
-            <option>No sé aún</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="mensaje">Mensaje</label>
-          <textarea id="mensaje" name="mensaje" placeholder="Cuéntame un poco más de tu negocio..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-dark">Enviar mensaje</button>
-      </form>
+    <div class="cta-actions reveal">
+      <a href="/contacto" class="btn btn-primary">Ir a contacto</a>
+      <a href="https://wa.me/56979282151" target="_blank" rel="noopener" class="btn btn-outline">Escríbeme por WhatsApp</a>
     </div>
   </div>
 </section>
@@ -994,7 +311,7 @@
   <div class="container">
     <div class="footer-top">
       <div>
-        <a href="#top" class="logo" aria-label="OrbexStudio">
+        <a href="/" class="logo" aria-label="OrbexStudio">
           <svg viewBox="0 0 190 66" width="140" role="img" aria-hidden="true">
             <ellipse cx="95" cy="24" rx="72" ry="17" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".55" transform="rotate(-14 95 24)"/>
             <text class="logo-word" x="6" y="35" font-size="32" fill="currentColor">orbex</text>
@@ -1004,9 +321,10 @@
         <p class="footer-tagline">Sitios web para negocios reales en Santiago.</p>
       </div>
       <nav class="footer-links">
-        <a href="#servicios">Servicios</a>
-        <a href="#portafolio">Portafolio</a>
-        <a href="#contacto">Contacto</a>
+        <a href="/nosotros">Nosotros</a>
+        <a href="/servicios">Servicios</a>
+        <a href="/proyectos">Proyectos</a>
+        <a href="/contacto">Contacto</a>
       </nav>
     </div>
     <div class="footer-bottom">
@@ -1020,81 +338,7 @@
   <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.9.5 3.68 1.44 5.23L2 22l4.99-1.51a9.9 9.9 0 0 0 5.05 1.37h.01c5.46 0 9.9-4.45 9.9-9.91 0-5.46-4.44-9.95-9.91-9.95zm0 18.02c-1.57 0-3.03-.42-4.3-1.16l-.31-.18-3.05.92.92-2.97-.2-.32a8.06 8.06 0 0 1-1.24-4.4c0-4.46 3.63-8.08 8.1-8.08 4.46 0 8.09 3.62 8.09 8.08 0 4.46-3.63 8.11-8.01 8.11zm4.44-6.07c-.24-.12-1.43-.71-1.65-.79-.22-.08-.38-.12-.55.12-.16.24-.63.79-.77.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.34-.76-1.83-.2-.48-.4-.42-.55-.42-.14-.01-.3-.01-.46-.01-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02 0 1.19.87 2.34.99 2.5.12.16 1.71 2.6 4.14 3.65.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.43-.58 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.1-.22-.16-.46-.28z"/></svg>
 </a>
 
-<script>
-  var header = document.getElementById('siteHeader');
-  window.addEventListener('scroll', function(){
-    header.classList.toggle('scrolled', window.scrollY > 40);
-  }, { passive:true });
-
-  var navToggle = document.getElementById('navToggle');
-  navToggle.addEventListener('click', function(){
-    header.classList.toggle('nav-open');
-  });
-  document.querySelectorAll('.nav-links a').forEach(function(link){
-    link.addEventListener('click', function(){ header.classList.remove('nav-open'); });
-  });
-
-  if ('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if (entry.isIntersecting){
-          entry.target.classList.add('visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold:.15 });
-    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
-  } else {
-    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
-  }
-
-  // Demo de fidelización: llama al backend de fidelizacion-nexo (otro
-  // proyecto/dominio) que crea la tarjeta demo y devuelve el link a la
-  // landing de fidelización, donde el usuario elige Apple o Google Wallet.
-  var WALLET_DEMO_API = 'https://fidelizacion-nave.vercel.app/api/demo/orbexstudio';
-
-  var walletDemoBtn = document.getElementById('walletDemoBtn');
-  var walletDemoError = document.getElementById('walletDemoError');
-
-  walletDemoBtn.addEventListener('click', function(){
-    walletDemoBtn.disabled = true;
-    walletDemoBtn.textContent = 'Generando...';
-    walletDemoError.hidden = true;
-
-    fetch(WALLET_DEMO_API, { method: 'POST' })
-      .then(function(res){
-        if (!res.ok) throw new Error('Error generando el pase');
-        return res.json();
-      })
-      .then(function(data){
-        window.location.href = data.landingUrl;
-      })
-      .catch(function(err){
-        console.error(err);
-        walletDemoError.textContent = 'No se pudo generar el pase. Intenta de nuevo.';
-        walletDemoError.hidden = false;
-      })
-      .finally(function(){
-        walletDemoBtn.disabled = false;
-        walletDemoBtn.textContent = 'Agregar tarjeta demo a mi Wallet';
-      });
-  });
-
-  // WEBHOOK n8n CONECTAR AQUÍ
-  // Cuando n8n esté activo, reemplazar el bloque de abajo por un fetch()
-  // POST hacia el webhook de n8n con los mismos datos del formulario.
-  document.getElementById('contactForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    var data = new FormData(e.target);
-    var texto = 'Hola OrbexStudio, quiero cotizar un sitio web.%0A%0A' +
-      'Nombre: ' + encodeURIComponent(data.get('nombre')) + '%0A' +
-      'Contacto: ' + encodeURIComponent(data.get('contactoCliente')) + '%0A' +
-      'Negocio: ' + encodeURIComponent(data.get('negocio')) + '%0A' +
-      'Necesito: ' + encodeURIComponent(data.get('necesidad')) + '%0A' +
-      'Mensaje: ' + encodeURIComponent(data.get('mensaje'));
-    window.open('https://wa.me/56979282151?text=' + texto, '_blank');
-  });
-</script>
+<script src="/main.js"></script>
 
 </body>
 </html>
